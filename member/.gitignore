@@ -40,3 +40,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Docker ###
+docker/db/mysql/data/
+docker/db/mysql/init/*
+!docker/db/mysql/init/init.sql
