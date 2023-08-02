@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     api(project(":core"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
     // Databases
     runtimeOnly("com.h2database:h2")
