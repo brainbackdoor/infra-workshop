@@ -5,6 +5,7 @@ import com.brainbackdoor.members.domain.Member
 import com.brainbackdoor.members.domain.MemberRepository
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
+import exception.ResourceNotFoundException
 import org.springframework.stereotype.Service
 
 
@@ -31,4 +32,15 @@ class MemberService(
             this.consentByMember,
             this.consentByPrivacy
         )
+
+    fun find(targetId: String): MemberResponse {
+        val member: Member = findById(targetId)
+        return MemberResponse(member)
+    }
+
+    fun findById(id: String): Member {
+        return memberRepository
+            .findById(id)
+            .orElseThrow { throw ResourceNotFoundException("$id 사용자가 없습니다.") }
+    }
 }
