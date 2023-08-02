@@ -1,0 +1,4 @@
+description = "core module"
+
+dependencies {
+}

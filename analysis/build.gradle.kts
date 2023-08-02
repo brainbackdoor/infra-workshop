@@ -1,19 +1,15 @@
+description = "analysis module"
+
 plugins {
-    id("java")
-}
-
-group = "com.brainbackdoor"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+    id("org.flywaydb.flyway") version "6.0.4"
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
+    api(project(":core"))
 
-tasks.test {
-    useJUnitPlatform()
+    // Databases
+    runtimeOnly("com.h2database:h2")
+    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("org.flywaydb:flyway-core")
+    runtimeOnly("org.flywaydb:flyway-mysql")
 }
