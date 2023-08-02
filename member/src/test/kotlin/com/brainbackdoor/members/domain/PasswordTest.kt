@@ -1,5 +1,6 @@
-package members.domain
+package com.brainbackdoor.members.domain
 
+import com.brainbackdoor.members.domain.Password
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: local
+
+logging:
+  config: classpath:config/logback-${spring.profiles.active}.xml
+
+security:
+  jwt:
+    token:
+      secret-key: secret
+      expire-length: 3600000

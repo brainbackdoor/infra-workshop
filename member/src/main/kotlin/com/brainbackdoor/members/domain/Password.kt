@@ -1,4 +1,4 @@
-package members.domain
+package com.brainbackdoor.members.domain
 
 import jakarta.persistence.Embeddable
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
