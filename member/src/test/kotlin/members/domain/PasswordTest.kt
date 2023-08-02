@@ -17,9 +17,10 @@ class PasswordTest {
         assertThrows<AuthenticationException> { password.check("other") }
     }
 
-    @Test
-    fun `패스워드는 8 자 이상이어야 한다`() {
-        assertThrows<IllegalArgumentException> { Password("123") }
+    @ParameterizedTest
+    @ValueSource(strings = ["123", "password1!password1!a"])
+    fun `패스워드는 8자 이상, 20자 이하여야 한다`(password: String) {
+        assertThrows<IllegalArgumentException> { Password(password) }
     }
 
     @ParameterizedTest
@@ -27,11 +28,5 @@ class PasswordTest {
     fun `하나 이상의 숫자 및 소문자와 특수 문자를 모두 포함해야 한다`(password: String) {
         assertThrows<IllegalArgumentException> { Password(password) }
         org.junit.jupiter.api.assertDoesNotThrow { Password("password1!") }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["password1!password1!a"])
-    fun `패스워드는 20자 이하여야 한다`(password: String) {
-        assertThrows<IllegalArgumentException> { Password(password) }
     }
 }

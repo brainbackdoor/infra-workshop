@@ -15,7 +15,7 @@ class MemberTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["email1@email.com"])
-    fun `이용자 ID를 이용한 패스워드는 사용할 수 없다`(mail: String) {
+    fun `이용자 ID와 동일한 패스워드는 사용할 수 없다`(mail: String) {
         assertThrows<IllegalArgumentException> { Member(mail, mail) }
     }
 }
