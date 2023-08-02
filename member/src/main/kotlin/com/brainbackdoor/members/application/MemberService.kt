@@ -23,16 +23,6 @@ class MemberService(
         return MemberResponse(member)
     }
 
-    private fun create(member: Member): Member = memberRepository.save(member)
-
-    private fun MemberCreateRequest.of(): Member =
-        Member(
-            this.mail,
-            this.password,
-            this.consentByMember,
-            this.consentByPrivacy
-        )
-
     fun find(targetId: String): MemberResponse {
         val member: Member = findById(targetId)
         return MemberResponse(member)
@@ -43,4 +33,14 @@ class MemberService(
             .findById(id)
             .orElseThrow { throw ResourceNotFoundException("$id 사용자가 없습니다.") }
     }
+
+    private fun create(member: Member): Member = memberRepository.save(member)
+
+    private fun MemberCreateRequest.of(): Member =
+        Member(
+            this.mail,
+            this.password,
+            this.consentByMember,
+            this.consentByPrivacy
+        )
 }
