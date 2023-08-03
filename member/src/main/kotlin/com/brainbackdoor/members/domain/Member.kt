@@ -65,3 +65,5 @@ class Member(
 }
 
 fun mail(address: String): Member.Mail = Member.Mail(address)
+
+fun guestMember(): Member = Member("GUEST@gmail.com", "password1!", consentByMember = false, consentByPrivacy = false)

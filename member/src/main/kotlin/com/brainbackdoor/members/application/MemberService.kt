@@ -34,6 +34,10 @@ class MemberService(
             .orElseThrow { throw ResourceNotFoundException("$id 사용자가 없습니다.") }
     }
 
+    fun findByEmail(mail: String): Member = memberRepository
+        .findByMailAddress(mail)
+        .orElseThrow { throw ResourceNotFoundException("$mail 사용자가 없습니다.") }
+
     fun checkPassword(email: String, password: String): Member {
         val member = findByEmail(email)
         member.checkPassword(password)
@@ -41,10 +45,6 @@ class MemberService(
     }
 
     private fun create(member: Member): Member = memberRepository.save(member)
-
-    private fun findByEmail(mail: String): Member = memberRepository
-        .findByMailAddress(mail)
-        .orElseThrow { throw ResourceNotFoundException("$mail 사용자가 없습니다.") }
 
     private fun MemberCreateRequest.of(): Member =
         Member(
