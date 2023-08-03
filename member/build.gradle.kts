@@ -13,6 +13,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
+    // jwt
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     // Databases
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")

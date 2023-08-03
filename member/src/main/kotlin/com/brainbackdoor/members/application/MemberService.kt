@@ -1,11 +1,11 @@
 package com.brainbackdoor.members.application
 
-import jakarta.transaction.Transactional
 import com.brainbackdoor.members.domain.Member
 import com.brainbackdoor.members.domain.MemberRepository
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
 import exception.ResourceNotFoundException
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 
@@ -34,7 +34,17 @@ class MemberService(
             .orElseThrow { throw ResourceNotFoundException("$id 사용자가 없습니다.") }
     }
 
+    fun checkPassword(email: String, password: String): Member {
+        val member = findByEmail(email)
+        member.checkPassword(password)
+        return member
+    }
+
     private fun create(member: Member): Member = memberRepository.save(member)
+
+    private fun findByEmail(mail: String): Member = memberRepository
+        .findByMailAddress(mail)
+        .orElseThrow { throw ResourceNotFoundException("$mail 사용자가 없습니다.") }
 
     private fun MemberCreateRequest.of(): Member =
         Member(

@@ -17,7 +17,7 @@ class Member(
     var consentByMember: Boolean = false,
 
     var consentByPrivacy: Boolean = false,
-    ) : RandomId<Member>() {
+) : RandomId<Member>() {
 
     constructor(
         mail: String,
@@ -37,6 +37,10 @@ class Member(
             ?.let {
                 check(it) { throw IllegalArgumentException("이용자 ID를 이용한 패스워드는 사용할 수 없습니다.") }
             }
+    }
+
+    fun checkPassword(password: String) {
+        this.password?.check(password) ?: IllegalArgumentException("패스워드가 존재하지 않습니다.")
     }
 
     fun mail(): String = mail.address
