@@ -19,8 +19,10 @@ fun 로그인_요청(email: String, password: String) : ExtractableResponse<Resp
 }
 
 fun 본인_정보_조회_요청(response: ExtractableResponse<Response>): ExtractableResponse<Response> {
-    val tokenResponse = response.`as`(TokenResponse::class.java)
+    return 본인_정보_조회_요청(response.`as`(TokenResponse::class.java))
+}
 
+fun 본인_정보_조회_요청(tokenResponse: TokenResponse): ExtractableResponse<Response> {
     return RestAssured.given().log().all().auth()
         .oauth2(tokenResponse.accessToken)
         .accept(MediaType.APPLICATION_JSON_VALUE)

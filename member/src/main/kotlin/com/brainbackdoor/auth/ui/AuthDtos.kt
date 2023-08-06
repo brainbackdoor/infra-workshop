@@ -7,5 +7,5 @@ data class LoginRequest(
 
 data class TokenResponse(
     val accessToken: String,
-    val email: String
+    val email: String = ""
 )
