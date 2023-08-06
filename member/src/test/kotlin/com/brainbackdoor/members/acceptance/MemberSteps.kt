@@ -1,5 +1,6 @@
 package com.brainbackdoor.members.acceptance
 
+import com.brainbackdoor.auth.domain.LoginMember
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
 import io.restassured.RestAssured
@@ -29,7 +30,7 @@ fun 회원_생성을_요청(
 }
 
 fun 회원_생성됨(response: ExtractableResponse<Response>) {
-    Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value())
+    assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value())
 }
 
 fun 회원_정보_조회_요청(response: ExtractableResponse<Response>): ExtractableResponse<Response> {
@@ -43,7 +44,7 @@ fun 회원_정보_조회_요청(response: ExtractableResponse<Response>): Extrac
 
 fun 회원_정보_조회됨(response: ExtractableResponse<Response>, email: String) {
     assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
-    val memberResponse = response.`as`(MemberResponse::class.java)
+    val memberResponse = response.`as`(LoginMember::class.java)
     assertThat(memberResponse.id).isNotNull()
-    assertThat(memberResponse.mail).isEqualTo(email)
+    assertThat(memberResponse.email).isEqualTo(email)
 }

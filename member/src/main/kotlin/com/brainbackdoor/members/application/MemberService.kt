@@ -38,13 +38,15 @@ class MemberService(
         .findByMailAddress(mail)
         .orElseThrow { throw ResourceNotFoundException("$mail 사용자가 없습니다.") }
 
+    fun existsBy(mail: String): Boolean = memberRepository.existsMemberByMailAddress(mail)
+
     fun checkPassword(email: String, password: String): Member {
         val member = findByEmail(email)
         member.checkPassword(password)
         return member
     }
 
-    private fun create(member: Member): Member = memberRepository.save(member)
+    fun create(member: Member): Member = memberRepository.save(member)
 
     private fun MemberCreateRequest.of(): Member =
         Member(

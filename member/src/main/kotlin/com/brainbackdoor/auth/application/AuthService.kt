@@ -33,7 +33,7 @@ class AuthService(
     }
 
     fun logout(loginMember: LoginMember) {
-        val loginToken = findTopMember(loginMember.id)
+        val loginToken = findTopMember(loginMember.id!!)
             ?: throw AuthenticationException("로그인 사용자가 아닙니다.")
 
         loginToken.logout()

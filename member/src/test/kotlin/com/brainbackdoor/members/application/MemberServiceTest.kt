@@ -1,9 +1,9 @@
 package com.brainbackdoor.members.application
 
-import com.brainbackdoor.AcceptanceTest
-import com.brainbackdoor.members.domain.MemberTest.Companion.MAIL
-import com.brainbackdoor.members.domain.MemberTest.Companion.PASSWORD
 import com.brainbackdoor.members.ui.MemberCreateRequest
+import com.brainbackdoor.support.AcceptanceTest
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_EMAIL
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_PASSWORD
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -38,24 +38,24 @@ class MemberServiceTest : AcceptanceTest() {
             return arrayOf(
                 Arguments.of(
                     MemberCreateRequest(
-                        MAIL,
-                        PASSWORD,
+                        ADMIN_EMAIL,
+                        ADMIN_PASSWORD,
                         consentByMember = true,
                         consentByPrivacy = false
                     )
                 ),
                 Arguments.of(
                     MemberCreateRequest(
-                        MAIL,
-                        PASSWORD,
+                        ADMIN_EMAIL,
+                        ADMIN_PASSWORD,
                         consentByMember = false,
                         consentByPrivacy = true
                     )
                 ),
                 Arguments.of(
                     MemberCreateRequest(
-                        MAIL,
-                        PASSWORD,
+                        ADMIN_EMAIL,
+                        ADMIN_PASSWORD,
                         consentByMember = false,
                         consentByPrivacy = false
                     )

@@ -23,6 +23,8 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
         plugin("org.jetbrains.kotlin.plugin.jpa")
+        plugin("org.jetbrains.kotlin.plugin.allopen")
+        plugin("org.jetbrains.kotlin.plugin.noarg")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
         plugin("org.jlleitschuh.gradle.ktlint")
@@ -80,6 +82,18 @@ subprojects {
             verbose.set(true)
             disabledRules.addAll("import-ordering")
         }
+    }
+
+    allOpen {
+        annotation("javax.persistence.Entity")
+        annotation("javax.persistence.MappedSuperclass")
+        annotation("javax.persistence.Embeddable")
+    }
+
+    noArg {
+        annotation("javax.persistence.Entity")
+        annotation("javax.persistence.MappedSuperclass")
+        annotation("javax.persistence.Embeddable")
     }
 }
 

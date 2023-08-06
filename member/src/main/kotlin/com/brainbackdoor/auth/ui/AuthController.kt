@@ -13,20 +13,15 @@ class AuthController(
 ) {
 
     @PostMapping("/login")
-    fun login(@RequestBody request: LoginRequest): ResponseEntity<TokenResponse> {
-        val token = authService.login(request)
-        return ResponseEntity.ok(token)
-    }
+    fun login(@RequestBody request: LoginRequest): ResponseEntity<TokenResponse> =
+        ResponseEntity.ok(authService.login(request))
 
-    @GetMapping("/token-confirm")
-    fun checkToken(@AuthenticationPrincipal loginMember: LoginMember): LoginMember {
-        return loginMember
-    }
+
+    @GetMapping("/me")
+    fun findMe(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<LoginMember> = ResponseEntity.ok(loginMember)
 
     @GetMapping("/logout")
-    fun logout(
-        @AuthenticationPrincipal loginMember: LoginMember,
-    ): ResponseEntity<String> {
+    fun logout(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<String> {
         authService.logout(loginMember)
         return ResponseEntity.ok().build()
     }

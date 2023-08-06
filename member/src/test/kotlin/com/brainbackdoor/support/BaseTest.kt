@@ -1,4 +1,4 @@
-package com.brainbackdoor
+package com.brainbackdoor.support
 
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
@@ -20,6 +20,9 @@ class AcceptanceTest : BaseTest() {
     @Autowired
     private lateinit var databaseCleanup: DatabaseCleanup
 
+    @Autowired
+    private lateinit var testData: InitialTestData
+
     @BeforeEach
     fun setUp() {
         if (RestAssured.port == RestAssured.UNDEFINED_PORT) {
@@ -28,5 +31,6 @@ class AcceptanceTest : BaseTest() {
         }
 
         databaseCleanup.execute()
+        testData.loadSpecificData()
     }
 }

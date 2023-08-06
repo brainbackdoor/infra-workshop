@@ -2,6 +2,7 @@ package com.brainbackdoor.auth
 
 import com.brainbackdoor.auth.application.AuthService
 import com.brainbackdoor.auth.domain.AuthenticationPrincipal
+import com.brainbackdoor.auth.domain.LoginMember
 import com.brainbackdoor.auth.domain.LoginMember.Companion.guestLoginMember
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.core.MethodParameter

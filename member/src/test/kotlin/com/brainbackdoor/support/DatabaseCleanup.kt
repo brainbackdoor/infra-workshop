@@ -1,5 +1,6 @@
-package com.brainbackdoor
+package com.brainbackdoor.support
 
+import com.google.common.base.CaseFormat
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
@@ -24,7 +25,7 @@ class DatabaseCleanup : InitializingBean {
                 e.javaType.getAnnotation(Entity::class.java) != null
             }
             .map { e: EntityType<*> ->
-                e.name.uppercase(Locale.getDefault())
+                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, e.name)
             }
             .collect(Collectors.toList())
     }
