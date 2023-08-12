@@ -31,12 +31,10 @@ class RequestAttributesByAdmin(
         logger.info("[Admin Auth PASSED] memberId={}", loginMember().id)
     }
 
-    private fun validAdmin(joinPoint: JoinPoint): String {
+    private fun validAdmin(joinPoint: JoinPoint) {
         val annotation = annotation(joinPoint)
-        return if (annotation.validAdmin) {
-            isAdmin().id
-        } else {
-            EMPTY_STRING
+        if (annotation.validAdmin) {
+            isAdmin()
         }
     }
 
