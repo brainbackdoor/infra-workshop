@@ -1,9 +1,7 @@
 package com.brainbackdoor.support
 
 import com.brainbackdoor.members.application.MemberService
-import com.brainbackdoor.members.domain.Member
-import com.brainbackdoor.members.domain.Password
-import com.brainbackdoor.members.domain.mail
+import com.brainbackdoor.members.domain.*
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
@@ -16,22 +14,38 @@ import org.springframework.stereotype.Component
 @Transactional
 abstract class InitialData {
     @Autowired
+    lateinit var roleRepository: RoleRepository
+
+
+    @Autowired
     lateinit var memberService: MemberService
 
     abstract fun loadSpecificData()
 }
 
-class ProdInitialData : InitialData() {
+open class ProdInitialData : InitialData() {
     override fun loadSpecificData() {
+        createRoles()
         createUser()
     }
 
+    private fun createRoles() {
+        RoleType.values().forEach { roleType ->
+            val role = roleRepository.findByRoleType(roleType)
+            role ?: roleRepository.save(roleType.createRole())
+        }
+    }
+
     private fun createUser() {
+        val roles = mutableListOf<Role>()
+        roles.add(roleRepository.findByRoleType(RoleType.ROLE_ADMIN)!!)
+
         val admin = Member(
             mail(ADMIN_EMAIL),
             Password(ADMIN_PASSWORD),
             consentByMember = true,
-            consentByPrivacy = true
+            consentByPrivacy = true,
+            roles = roles
         )
 
         if (!memberService.existsBy(ADMIN_EMAIL)) {

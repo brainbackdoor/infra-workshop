@@ -17,19 +17,22 @@ class Recruitment(
 
     @Enumerated(EnumType.STRING)
     var status: RecruitmentStatus = RecruitmentStatus.READY,
+
+    @Embedded
+    var applicants: Applicants = Applicants()
 ) : RandomId<Recruitment>()
 
 @Embeddable
 class Period(
-    start: LocalDateTime,
-    private var end: LocalDateTime
+    var periodStart: LocalDateTime,
+    var periodEnd: LocalDateTime
 ) {
     constructor(start: String, end: String) : this(LocalDateTime.parse(start), LocalDateTime.parse(end))
 
-    fun isBefore(testDay: LocalDateTime): Boolean = end.isBefore(testDay)
+    fun isBefore(testDay: LocalDateTime): Boolean = periodEnd.isBefore(testDay)
 
     init {
-        check(start.isBefore(end)) {
+        check(periodStart.isBefore(periodEnd)) {
             throw IllegalArgumentException("컨퍼런스 모집 기간의 종료일은 시작일보다 앞설 수 없습니다.")
         }
     }

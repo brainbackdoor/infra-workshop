@@ -1,10 +1,7 @@
 package com.brainbackdoor.members.domain
 
 import domain.RandomId
-import jakarta.persistence.Column
-import jakarta.persistence.Embeddable
-import jakarta.persistence.Embedded
-import jakarta.persistence.Entity
+import jakarta.persistence.*
 
 @Entity
 class Member(
@@ -17,6 +14,24 @@ class Member(
     var consentByMember: Boolean = false,
 
     var consentByPrivacy: Boolean = false,
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.MERGE])
+    @JoinTable(
+        name = "member_roles",
+        joinColumns = [
+            JoinColumn(
+                name = "member_id", referencedColumnName = "id",
+                foreignKey = ForeignKey(name = "fk_member_roles_to_member")
+            )
+        ],
+        inverseJoinColumns = [
+            JoinColumn(
+                name = "role_id", referencedColumnName = "id",
+                foreignKey = ForeignKey(name = "fk_member_roles_to_role")
+            )
+        ]
+    )
+    val roles: MutableList<Role>
 ) : RandomId<Member>() {
 
     constructor(
@@ -24,11 +39,13 @@ class Member(
         password: String,
         consentByMember: Boolean,
         consentByPrivacy: Boolean,
+        role: Role
     ) : this(
         mail(mail),
         Password(password),
         consentByMember,
         consentByPrivacy,
+        mutableListOf(role)
     )
 
     init {
@@ -65,5 +82,3 @@ class Member(
 }
 
 fun mail(address: String): Member.Mail = Member.Mail(address)
-
-fun guestMember(): Member = Member("GUEST@gmail.com", "password1!", consentByMember = false, consentByPrivacy = false)

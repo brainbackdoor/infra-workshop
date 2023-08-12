@@ -13,9 +13,11 @@ data class MemberCreateRequest(
 data class MemberResponse(
     val id: String,
     val mail: String,
+    val roles: List<String>
 ) {
     constructor(member: Member) : this(
         member.id,
-        member.mail()
+        member.mail(),
+        member.roles.map { it.roleType.name }
     )
 }

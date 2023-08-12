@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:h2:mem://localhost/~/member;DB_CLOSE_DELAY=-1
+
+  flyway:
+    enabled: false
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    orig:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: DEBUG
+
+external:
+  login-member:
+    host: http://localhost:8080

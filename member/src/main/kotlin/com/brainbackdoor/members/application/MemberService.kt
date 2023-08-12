@@ -1,7 +1,6 @@
 package com.brainbackdoor.members.application
 
-import com.brainbackdoor.members.domain.Member
-import com.brainbackdoor.members.domain.MemberRepository
+import com.brainbackdoor.members.domain.*
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
 import exception.ResourceNotFoundException
@@ -12,7 +11,8 @@ import org.springframework.stereotype.Service
 @Service
 @Transactional
 class MemberService(
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
+    private val roleRepository: RoleRepository
 ) {
     fun create(request: MemberCreateRequest): MemberResponse {
         check(request.consentByMember && request.consentByPrivacy) {
@@ -53,6 +53,14 @@ class MemberService(
             this.mail,
             this.password,
             this.consentByMember,
-            this.consentByPrivacy
+            this.consentByPrivacy,
+            guestRole()
         )
+
+    private fun guestRole(): Role = roleRepository.findByRoleType(RoleType.ROLE_GUEST) ?: Role.guest()
+    fun findTest(): List<MemberResponse> {
+        return memberRepository.findAll().map { MemberResponse(it) }
+    }
+
+
 }

@@ -24,4 +24,9 @@ class MemberController(
         val member = memberService.find(id)
         return ResponseEntity.ok(member)
     }
+
+    @GetMapping
+    fun findTest(): ResponseEntity<List<MemberResponse>> {
+        return ResponseEntity.ok(memberService.findTest())
+    }
 }

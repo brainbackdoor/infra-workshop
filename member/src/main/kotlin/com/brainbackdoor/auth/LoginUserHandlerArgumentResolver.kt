@@ -2,8 +2,7 @@ package com.brainbackdoor.auth
 
 import com.brainbackdoor.auth.application.AuthService
 import com.brainbackdoor.auth.domain.AuthenticationPrincipal
-import com.brainbackdoor.auth.domain.LoginMember
-import com.brainbackdoor.auth.domain.LoginMember.Companion.guestLoginMember
+import exception.HasNotPermissionException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
@@ -32,7 +31,7 @@ class LoginUserHandlerArgumentResolver(
             val token: String = HttpHeader.auth(request)
             return authService.findLoginMemberBy(token)
         }
-        return guestLoginMember()
+        throw HasNotPermissionException("토큰이 존재하지 않아, 인증할 수가 없습니다.")
     }
 }
 
