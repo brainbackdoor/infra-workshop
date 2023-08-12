@@ -3,7 +3,7 @@ package com.brainbackdoor.conference.ui
 import com.brainbackdoor.conference.domain.Conference
 import com.brainbackdoor.conference.domain.RecruitmentStatus
 
-data class ConferenceCreateRequest(
+data class ConferenceRequest(
     val recruitmentStartDate: String,
     val recruitmentEndDate: String,
     val conferenceSchedule: String,
@@ -13,7 +13,7 @@ data class ConferenceCreateRequest(
     val contents: String = ""
 )
 
-data class ConferenceCreateResponse(
+data class ConferenceResponse(
     val id: String,
     val recruitmentStartDate: String,
     val recruitmentEndDate: String,
@@ -34,5 +34,13 @@ data class ConferenceCreateResponse(
         conference.recruitment.fee,
         conference.contents,
         conference.recruitment.status
+    )
+}
+
+data class ConferenceStatusRequest(val status: String)
+data class ConferenceStatusResponse(val id: String, val status: String) {
+    constructor(conference: Conference) : this(
+        conference.id,
+        conference.status().name
     )
 }

@@ -15,13 +15,33 @@ class Recruitment(
     var status: RecruitmentStatus = RecruitmentStatus.READY,
 
     @Embedded
-    var applicants: Applicants = Applicants()
-) : RandomId<Recruitment>()
+    var applicants: Applicants = Applicants(),
+) : RandomId<Recruitment>() {
+    fun isBeforeStart(): Boolean = status.ordinal < RecruitmentStatus.START.ordinal
+
+    fun isStarted(): Boolean = status == RecruitmentStatus.START
+
+    fun isStooped(): Boolean = status == RecruitmentStatus.STOP
+
+    fun isFinished(): Boolean = status == RecruitmentStatus.FINISH
+
+    fun start() {
+        status = RecruitmentStatus.START
+    }
+
+    fun stop() {
+        status = RecruitmentStatus.STOP
+    }
+
+    fun finish() {
+        status = RecruitmentStatus.FINISH
+    }
+}
 
 @Embeddable
 class Period(
     var periodStart: LocalDateTime,
-    var periodEnd: LocalDateTime
+    var periodEnd: LocalDateTime,
 ) {
     constructor(start: String, end: String) : this(LocalDateTime.parse(start), LocalDateTime.parse(end))
 

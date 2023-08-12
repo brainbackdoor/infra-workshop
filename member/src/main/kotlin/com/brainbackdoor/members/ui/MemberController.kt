@@ -12,7 +12,9 @@ class MemberController(
 ) {
 
     @PostMapping
-    fun create(@RequestBody request: MemberCreateRequest): ResponseEntity<String> {
+    fun create(
+        @RequestBody request: MemberCreateRequest
+    ): ResponseEntity<String> {
         val id = memberService.create(request).id
         return ResponseEntity.created(URI.create("/api/members/$id")).build()
     }
