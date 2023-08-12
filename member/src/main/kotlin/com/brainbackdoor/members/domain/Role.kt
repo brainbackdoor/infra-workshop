@@ -25,6 +25,14 @@ class Role(
     override fun equals(other: Any?): Boolean {
         return roleType.name == (other as Role).roleType.name
     }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + roleType.hashCode()
+        return result
+    }
+
+
 }
 
 enum class RoleType {

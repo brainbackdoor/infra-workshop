@@ -57,7 +57,7 @@ class Member(
     }
 
     fun checkPassword(password: String) {
-        this.password?.check(password) ?: IllegalArgumentException("패스워드가 존재하지 않습니다.")
+        this.password?.check(password)
     }
 
     fun mail(): String = mail.address

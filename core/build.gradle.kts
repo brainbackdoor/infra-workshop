@@ -1,5 +1,6 @@
 description = "core module"
 
+
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.3")
