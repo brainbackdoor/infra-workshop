@@ -34,6 +34,7 @@ class DatabaseCleanup : InitializingBean {
     fun execute() {
         entityManager.flush()
         entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate()
+        tableNames = tableNames.filterNot { it == "role" }.toList()
         for (tableName in tableNames) {
             entityManager.createNativeQuery("TRUNCATE TABLE $tableName").executeUpdate()
         }

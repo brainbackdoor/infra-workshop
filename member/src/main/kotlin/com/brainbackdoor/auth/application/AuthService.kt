@@ -21,7 +21,7 @@ class AuthService(
         val member = memberService.checkPassword(request.email, request.password)
         val token = tokenService.create(request.email)
         val persist = saveIfNotExist(member.id, token)
-        return TokenResponse(persist.token, member.mail())
+        return TokenResponse(persist.token, member.email())
     }
 
     fun findLoginMemberBy(token: String): LoginMember {

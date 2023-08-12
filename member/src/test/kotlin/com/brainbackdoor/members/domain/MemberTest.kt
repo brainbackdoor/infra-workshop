@@ -10,13 +10,13 @@ class MemberTest {
     @ParameterizedTest
     @ValueSource(strings = ["mail", "mail@", "@mail.com", "mail@mail!", "mail@mail.m"])
     fun `이메일 형식 유효성을 검증한다`(mail: String) {
-        assertThrows<IllegalArgumentException> { mail(mail) }
-        assertDoesNotThrow { mail(ADMIN_EMAIL) }
+        assertThrows<IllegalArgumentException> { email(mail) }
+        assertDoesNotThrow { email(ADMIN_EMAIL) }
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["email1@email.com"])
     fun `이용자 ID와 동일한 패스워드는 사용할 수 없다`(mail: String) {
-        assertThrows<IllegalArgumentException> { Member(mail, mail, consentByMember = true, consentByPrivacy = true) }
+        assertThrows<IllegalArgumentException> { Member(mail, mail, consentByMember = true, consentByPrivacy = true, role = Role.guest()) }
     }
 }

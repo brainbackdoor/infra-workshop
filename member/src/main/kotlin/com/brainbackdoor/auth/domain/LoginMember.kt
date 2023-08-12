@@ -10,7 +10,7 @@ data class LoginMember(
 ) {
     constructor(member: Member) : this(
         member.id,
-        member.mail(),
+        member.email(),
         member.roles.map { it.roleType.name }
     )
 }

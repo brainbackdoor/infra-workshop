@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Entity
 class Member(
     @Embedded
-    var mail: Mail,
+    var email: Email,
 
     @Embedded
     var password: Password?,
@@ -35,13 +35,13 @@ class Member(
 ) : RandomId<Member>() {
 
     constructor(
-        mail: String,
+        email: String,
         password: String,
         consentByMember: Boolean,
         consentByPrivacy: Boolean,
         role: Role
     ) : this(
-        mail(mail),
+        email(email),
         Password(password),
         consentByMember,
         consentByPrivacy,
@@ -50,7 +50,7 @@ class Member(
 
     init {
         password
-            ?.isMatched(this.mail.address)
+            ?.isMatched(this.email.address)
             ?.let {
                 check(it) { throw IllegalArgumentException("이용자 ID를 이용한 패스워드는 사용할 수 없습니다.") }
             }
@@ -60,10 +60,10 @@ class Member(
         this.password?.check(password)
     }
 
-    fun mail(): String = mail.address
+    fun email(): String = email.address
 
     @Embeddable
-    class Mail(
+    class Email(
         @Column(unique = true, length = 100)
         val address: String
     ) {
@@ -81,4 +81,4 @@ class Member(
     }
 }
 
-fun mail(address: String): Member.Mail = Member.Mail(address)
+fun email(address: String): Member.Email = Member.Email(address)

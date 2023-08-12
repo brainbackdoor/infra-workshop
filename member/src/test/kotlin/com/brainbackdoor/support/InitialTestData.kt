@@ -1,8 +1,6 @@
 package com.brainbackdoor.support
 
-import com.brainbackdoor.members.domain.Member
-import com.brainbackdoor.members.domain.Password
-import com.brainbackdoor.members.domain.mail
+import com.brainbackdoor.members.domain.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -19,17 +17,22 @@ class TestDataLoader {
         return InitialTestData()
     }
 }
-open class InitialTestData : InitialData() {
+
+class InitialTestData : InitialData() {
     override fun loadSpecificData() {
         createUser()
     }
 
     private fun createUser() {
+        val roles = mutableListOf<Role>()
+        roles.add(roleRepository.findByRoleType(RoleType.ROLE_ADMIN)!!)
+
         val admin = Member(
-            mail(ADMIN_EMAIL),
+            email(ADMIN_EMAIL),
             Password(ADMIN_PASSWORD),
             consentByMember = true,
-            consentByPrivacy = true
+            consentByPrivacy = true,
+            roles = roles
         )
 
         if (!memberService.existsBy(ADMIN_EMAIL)) {
@@ -41,7 +44,6 @@ open class InitialTestData : InitialData() {
         const val ADMIN_EMAIL = "test@gmail.com"
         const val ADMIN_PASSWORD = "password1!"
     }
-
 }
 
 

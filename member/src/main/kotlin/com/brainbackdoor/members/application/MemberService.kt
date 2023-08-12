@@ -34,11 +34,11 @@ class MemberService(
             .orElseThrow { throw ResourceNotFoundException("$id 사용자가 없습니다.") }
     }
 
-    fun findByEmail(mail: String): Member = memberRepository
-        .findByMailAddress(mail)
-        .orElseThrow { throw ResourceNotFoundException("$mail 사용자가 없습니다.") }
+    fun findByEmail(email: String): Member = memberRepository
+        .findByEmailAddress(email)
+        .orElseThrow { throw ResourceNotFoundException("$email 사용자가 없습니다.") }
 
-    fun existsBy(mail: String): Boolean = memberRepository.existsMemberByMailAddress(mail)
+    fun existsBy(email: String): Boolean = memberRepository.existsMemberByEmailAddress(email)
 
     fun checkPassword(email: String, password: String): Member {
         val member = findByEmail(email)
@@ -50,7 +50,7 @@ class MemberService(
 
     private fun MemberCreateRequest.of(): Member =
         Member(
-            this.mail,
+            this.email,
             this.password,
             this.consentByMember,
             this.consentByPrivacy,

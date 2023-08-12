@@ -12,6 +12,7 @@ import org.springframework.context.event.ContextRefreshedEvent
 import org.springframework.stereotype.Component
 
 @Transactional
+@Component
 abstract class InitialData {
     @Autowired
     lateinit var roleRepository: RoleRepository
@@ -21,13 +22,6 @@ abstract class InitialData {
     lateinit var memberService: MemberService
 
     abstract fun loadSpecificData()
-}
-
-open class ProdInitialData : InitialData() {
-    override fun loadSpecificData() {
-        createRoles()
-        createUser()
-    }
 
     private fun createRoles() {
         RoleType.values().forEach { roleType ->
@@ -36,12 +30,23 @@ open class ProdInitialData : InitialData() {
         }
     }
 
+    fun load() {
+        createRoles()
+        loadSpecificData()
+    }
+}
+
+class ProdInitialData : InitialData() {
+    override fun loadSpecificData() {
+        createUser()
+    }
+
     private fun createUser() {
         val roles = mutableListOf<Role>()
         roles.add(roleRepository.findByRoleType(RoleType.ROLE_ADMIN)!!)
 
         val admin = Member(
-            mail(ADMIN_EMAIL),
+            email(ADMIN_EMAIL),
             Password(ADMIN_PASSWORD),
             consentByMember = true,
             consentByPrivacy = true,
@@ -64,7 +69,7 @@ class InitialDataBootStrap(
     private val initialData: InitialData
 ) : ApplicationListener<ContextRefreshedEvent> {
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
-        initialData.loadSpecificData()
+        initialData.load()
     }
 }
 
