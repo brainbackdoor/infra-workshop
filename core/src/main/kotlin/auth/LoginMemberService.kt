@@ -1,6 +1,6 @@
-package com.brainbackdoor.web.auth
+package auth
 
-import com.brainbackdoor.web.auth.external.LoginMemberClient
+import auth.external.LoginMemberClient
 import org.springframework.stereotype.Component
 
 @Component

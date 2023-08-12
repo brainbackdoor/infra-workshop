@@ -1,4 +1,4 @@
-package com.brainbackdoor.web.auth.external
+package auth.external
 
 data class MemberCreateRequest(
     val mail: String,

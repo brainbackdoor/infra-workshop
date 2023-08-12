@@ -1,4 +1,4 @@
-package com.brainbackdoor.web.auth.aop
+package auth.aop
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)

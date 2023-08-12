@@ -51,6 +51,7 @@ class HttpHeader {
             }
             throw AuthenticationException("인증과 관련된 Http Header 가 존재하지 않습니다.")
         }
+
         fun hasAuthorization(request: HttpServletRequest): Boolean = request.getHeaders(AUTHORIZATION).hasMoreElements()
 
         private fun bearerType(value: String): String {

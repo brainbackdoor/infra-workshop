@@ -1,10 +1,9 @@
-package com.brainbackdoor.web.auth.aop
+package auth.aop
 
+import auth.LoginMemberDto
+import auth.LoginMemberService
+import auth.aop.AdminAuth.Companion.ACCESS_TOKEN
 import ch.qos.logback.core.CoreConstants.EMPTY_STRING
-import com.brainbackdoor.web.auth.LoginMember
-import com.brainbackdoor.web.auth.LoginMemberService
-import com.brainbackdoor.web.auth.Role
-import com.brainbackdoor.web.auth.aop.AdminAuth.Companion.ACCESS_TOKEN
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import exception.HasNotPermissionException
@@ -46,7 +45,7 @@ class RequestAttributesByAdmin(
 
     private fun loginMember() = loginMemberService.findMe(token())
 
-    private fun isAdmin(): LoginMember {
+    private fun isAdmin(): LoginMemberDto {
         val loginMember = loginMember()
         check(loginMember.isAdmin()) {
             throw HasNotPermissionException("${loginMember.email} 계정은 관리자가 아닙니다.")

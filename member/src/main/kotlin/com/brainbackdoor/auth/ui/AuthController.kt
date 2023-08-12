@@ -18,7 +18,8 @@ class AuthController(
 
 
     @GetMapping("/me")
-    fun findMe(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<LoginMember> = ResponseEntity.ok(loginMember)
+    fun findMe(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<LoginMember> =
+        ResponseEntity.ok(loginMember)
 
     @GetMapping("/logout")
     fun logout(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<String> {

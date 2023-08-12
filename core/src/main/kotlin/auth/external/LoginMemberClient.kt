@@ -1,6 +1,6 @@
-package com.brainbackdoor.web.auth.external
+package auth.external
 
-import com.brainbackdoor.web.auth.LoginMember
+import auth.LoginMemberDto
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
@@ -13,5 +13,5 @@ interface LoginMemberClient {
     @GetMapping(value = ["/api/auth/me"])
     fun findMe(
         @RequestHeader("Authorization") token: String
-    ): LoginMember
+    ): LoginMemberDto
 }

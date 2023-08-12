@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import javax.naming.AuthenticationException
 
 private val logger = KotlinLogging.logger { }
+
 @RestControllerAdvice
 class ExceptionHandlers {
 

@@ -24,7 +24,7 @@ data class ConferenceCreateResponse(
     val contents: String = "",
     val status: RecruitmentStatus
 ) {
-    constructor(conference: Conference): this(
+    constructor(conference: Conference) : this(
         conference.id,
         conference.recruitment.recruitmentPeriod.periodStart.toString(),
         conference.recruitment.recruitmentPeriod.periodEnd.toString(),

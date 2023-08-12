@@ -29,7 +29,6 @@ class Role(
 
 enum class RoleType {
     ROLE_ADMIN,
-    ROLE_STUDENT,
     ROLE_GUEST;
 
     fun createRole(): Role {

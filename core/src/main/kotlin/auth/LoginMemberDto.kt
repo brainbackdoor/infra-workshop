@@ -1,6 +1,6 @@
-package com.brainbackdoor.web.auth
+package auth
 
-data class LoginMember(
+data class LoginMemberDto(
     val id: String,
     val email: String,
     val roles: List<Role>
@@ -10,6 +10,5 @@ data class LoginMember(
 
 enum class Role {
     ROLE_ADMIN,
-    ROLE_STUDENT,
     ROLE_GUEST;
 }
