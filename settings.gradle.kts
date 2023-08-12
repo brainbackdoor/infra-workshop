@@ -3,4 +3,5 @@ include("core")
 include("member")
 include("conference")
 include("analysis")
-
+include("platform")
+include("front")

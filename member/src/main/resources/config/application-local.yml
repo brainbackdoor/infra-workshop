@@ -21,3 +21,7 @@ logging:
           descriptor:
             sql:
               BasicBinder: DEBUG
+
+external:
+  login-member:
+    host: http://localhost:8080

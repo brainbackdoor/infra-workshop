@@ -1,13 +1,9 @@
 server:
-  port: 8081
+  port: 8083
 
 spring:
   datasource:
-    url: jdbc:h2:mem://localhost/~/conference;DB_CLOSE_DELAY=-1
-
-  flyway:
-    enabled: false
-
+    url: jdbc:h2:mem://localhost/~/front;DB_CLOSE_DELAY=-1
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     open-in-view: false
@@ -16,15 +12,8 @@ spring:
         format_sql: true
     show-sql: true
 
-logging:
-  level:
-    orig:
-      hibernate:
-        type:
-          descriptor:
-            sql:
-              BasicBinder: DEBUG
-
 external:
+  conference:
+    host: http://localhost:8081
   login-member:
     host: http://localhost:8080

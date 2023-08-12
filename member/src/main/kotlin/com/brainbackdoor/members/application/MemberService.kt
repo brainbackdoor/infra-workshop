@@ -3,7 +3,7 @@ package com.brainbackdoor.members.application
 import com.brainbackdoor.members.domain.*
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
-import exception.ResourceNotFoundException
+import com.brainbackdoor.exception.ResourceNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -58,9 +58,4 @@ class MemberService(
         )
 
     private fun guestRole(): Role = roleRepository.findByRoleType(RoleType.ROLE_GUEST) ?: Role.guest()
-    fun findTest(): List<MemberResponse> {
-        return memberRepository.findAll().map { MemberResponse(it) }
-    }
-
-
 }

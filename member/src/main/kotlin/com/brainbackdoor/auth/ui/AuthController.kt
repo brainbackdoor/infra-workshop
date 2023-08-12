@@ -1,7 +1,7 @@
 package com.brainbackdoor.auth.ui
 
+import com.brainbackdoor.auth.Auth
 import com.brainbackdoor.auth.application.AuthService
-import com.brainbackdoor.auth.domain.AuthenticationPrincipal
 import com.brainbackdoor.auth.domain.LoginMember
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -18,11 +18,11 @@ class AuthController(
 
 
     @GetMapping("/me")
-    fun findMe(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<LoginMember> =
+    fun findMe(@Auth loginMember: LoginMember): ResponseEntity<LoginMember> =
         ResponseEntity.ok(loginMember)
 
     @GetMapping("/logout")
-    fun logout(@AuthenticationPrincipal loginMember: LoginMember): ResponseEntity<String> {
+    fun logout(@Auth loginMember: LoginMember): ResponseEntity<String> {
         authService.logout(loginMember)
         return ResponseEntity.ok().build()
     }

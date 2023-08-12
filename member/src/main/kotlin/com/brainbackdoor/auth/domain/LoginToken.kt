@@ -1,9 +1,9 @@
 package com.brainbackdoor.auth.domain
 
-import domain.AutoIncrementId
+import com.brainbackdoor.domain.AutoIncrementId
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import support.RandomValueIdGenerator.Companion.ID_LENGTH
+import com.brainbackdoor.support.RandomValueIdGenerator.Companion.ID_LENGTH
 import java.time.LocalDate
 
 @Entity

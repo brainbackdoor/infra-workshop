@@ -1,6 +1,6 @@
 package com.brainbackdoor.members.domain
 
-import domain.RandomId
+import com.brainbackdoor.domain.RandomId
 import jakarta.persistence.*
 
 @Entity

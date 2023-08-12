@@ -1,5 +1,6 @@
 package com.brainbackdoor.members.ui
 
+import com.brainbackdoor.auth.AdminAuth
 import com.brainbackdoor.members.application.MemberService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,6 +13,7 @@ class MemberController(
 ) {
 
     @PostMapping
+    @AdminAuth
     fun create(
         @RequestBody request: MemberCreateRequest
     ): ResponseEntity<String> {
@@ -20,15 +22,11 @@ class MemberController(
     }
 
     @GetMapping("/{id}")
+    @AdminAuth
     fun find(
         @PathVariable id: String
     ): ResponseEntity<MemberResponse> {
         val member = memberService.find(id)
         return ResponseEntity.ok(member)
-    }
-
-    @GetMapping
-    fun findTest(): ResponseEntity<List<MemberResponse>> {
-        return ResponseEntity.ok(memberService.findTest())
     }
 }

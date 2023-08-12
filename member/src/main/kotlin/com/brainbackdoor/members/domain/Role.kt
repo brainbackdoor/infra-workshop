@@ -1,6 +1,6 @@
 package com.brainbackdoor.members.domain
 
-import domain.AutoIncrementId
+import com.brainbackdoor.domain.AutoIncrementId
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType

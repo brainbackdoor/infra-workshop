@@ -1,6 +1,6 @@
 package com.brainbackdoor.web.config
 
-import com.brainbackdoor.auth.LoginUserHandlerArgumentResolver
+import com.brainbackdoor.auth.AuthorizationArgumentResolver
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
 import org.springframework.context.annotation.Bean
@@ -28,7 +28,7 @@ class WebSecurityConfig {
 
 @Configuration
 class WebMvcConfig(
-    private val loginUserArgumentResolver: LoginUserHandlerArgumentResolver
+    private val loginUserArgumentResolver: AuthorizationArgumentResolver,
 ) : WebMvcConfigurer {
 
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
