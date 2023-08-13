@@ -8,6 +8,8 @@ import jakarta.persistence.OneToMany
 class Applicants(
     var limited: Int = 0,
 
+    var lotteryBoundary: Int = 0,
+
     @OneToMany(mappedBy = "recruitment", cascade = [CascadeType.MERGE])
     val applicants: MutableList<Applicant> = mutableListOf()
 ) {
@@ -24,4 +26,8 @@ class Applicants(
     }
 
     fun contains(applicant: Applicant): Boolean = applicants.contains(applicant)
+    fun lottery() {
+        applicants.shuffle()
+        applicants.subList(0, lotteryBoundary)
+    }
 }

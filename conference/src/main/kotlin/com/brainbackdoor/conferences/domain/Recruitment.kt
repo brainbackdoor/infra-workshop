@@ -43,6 +43,12 @@ class Recruitment(
 
         applicants.join(applicant)
     }
+
+    fun lottery() {
+        check(isFinished()) { throw IllegalArgumentException("모집이 완료된 후에야, 추첨을 진행할 수 있습니다.") }
+
+        applicants.lottery()
+    }
 }
 
 @Embeddable

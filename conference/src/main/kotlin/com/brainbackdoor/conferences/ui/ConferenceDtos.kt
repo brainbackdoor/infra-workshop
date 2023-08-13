@@ -10,6 +10,7 @@ data class ConferenceRequest(
     val conferenceSchedule: String,
     val area: String,
     val limited: Int,
+    var lotteryBoundary: Int,
     val fee: Int,
     val contents: String = ""
 )
@@ -21,6 +22,7 @@ data class ConferenceResponse(
     val conferenceSchedule: String,
     val area: String,
     val limited: Int,
+    var lotteryBoundary: Int,
     val fee: Int,
     val contents: String = "",
     val status: RecruitmentStatus
@@ -32,6 +34,7 @@ data class ConferenceResponse(
         conference.schedule.toString(),
         conference.area,
         conference.recruitment.applicants.limited,
+        conference.recruitment.applicants.lotteryBoundary,
         conference.recruitment.fee,
         conference.contents,
         conference.recruitment.status
@@ -45,6 +48,7 @@ data class ConferenceAllResponse(
     val schedule: String,
     val area: String,
     val limited: Int,
+    var lotteryBoundary: Int,
     val fee: Int,
     val contents: String = "",
     val status: RecruitmentStatus,
@@ -57,6 +61,7 @@ data class ConferenceAllResponse(
         conference.schedule.toString(),
         conference.area,
         conference.recruitment.applicants.limited,
+        conference.recruitment.applicants.lotteryBoundary,
         conference.recruitment.fee,
         conference.contents,
         conference.recruitment.status,

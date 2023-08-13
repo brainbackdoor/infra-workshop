@@ -48,8 +48,8 @@ class ConferenceService(
 
     fun recruit(memberId: String, id: String): ConferenceResponse {
         val conference = conference(id)
-        val applicant = Applicant(memberId, conference.recruitment)
-        applicantRepository.save(applicant)
+        val applicant = applicant(memberId, conference)
+
         conference.recruit(applicant)
         return ConferenceResponse(conference)
     }
@@ -58,6 +58,14 @@ class ConferenceService(
         conferenceRepository
             .findById(id)
             .orElseThrow { throw ResourceNotFoundException("$id 의 컨퍼런스가 없습니다.") }
+
+    private fun applicant(
+        memberId: String,
+        conference: Conference,
+    ): Applicant {
+        val applicant = Applicant(memberId, conference.recruitment)
+        return applicantRepository.save(applicant)
+    }
 
     private fun ConferenceRequest.of(): Conference {
         val conference = Conference(
@@ -73,6 +81,7 @@ class ConferenceService(
             )
         )
         conference.recruitment.applicants.limited = limited
+        conference.recruitment.applicants.lotteryBoundary = lotteryBoundary
         return conference
     }
 
