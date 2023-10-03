@@ -1,4 +1,4 @@
-package com.brainbackdoor.web.config
+package com.brainbackdoor.config
 
 import com.brainbackdoor.auth.AuthorizationArgumentResolver
 import com.brainbackdoor.support.LocalDateConverter
