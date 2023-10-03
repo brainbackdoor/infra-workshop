@@ -23,6 +23,6 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-mysql")
 
     // Feign
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.5")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.4")
     implementation("io.github.openfeign:feign-httpclient:11.0")
 }
