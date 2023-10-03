@@ -21,6 +21,7 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("org.flywaydb:flyway-core")
     runtimeOnly("org.flywaydb:flyway-mysql")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1")
 
     // Feign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.4")
