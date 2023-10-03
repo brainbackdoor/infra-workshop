@@ -1,6 +1,6 @@
 package com.brainbackdoor.conferences
 
-import com.brainbackdoor.auth.HttpHeader.Companion.AUTHORIZATION
+import com.brainbackdoor.web.HttpHeader.Companion.AUTHORIZATION
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 

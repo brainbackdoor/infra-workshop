@@ -1,16 +1,17 @@
-package com.brainbackdoor.auth
+package com.brainbackdoor.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import mu.KotlinLogging
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.servlet.HandlerMapping
 import java.util.*
 import javax.naming.AuthenticationException
+import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
+
 open class HttpServletRequestAttributes(
     private val objectMapper: ObjectMapper = jacksonObjectMapper()
 ) {

@@ -1,8 +1,8 @@
-package com.brainbackdoor.web
+package com.brainbackdoor.auth
 
-import com.brainbackdoor.auth.HttpHeader
-import com.brainbackdoor.auth.HttpHeader.Companion.AUTHORIZATION
-import com.brainbackdoor.auth.HttpServletRequest.Companion.get
+import com.brainbackdoor.web.HttpHeader
+import com.brainbackdoor.web.HttpHeader.Companion.AUTHORIZATION
+import com.brainbackdoor.web.HttpServletRequest.Companion.get
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.support.WebDataBinderFactory
@@ -13,7 +13,7 @@ import org.springframework.web.method.support.ModelAndViewContainer
 @Component
 class AuthorizationArgumentResolver: HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean =
-        parameter.hasParameterAnnotation(AuthorizationToken::class.java)
+        parameter.hasParameterAnnotation(Auth::class.java)
 
     override fun resolveArgument(
         parameter: MethodParameter,

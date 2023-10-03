@@ -1,9 +1,11 @@
 package com.brainbackdoor.auth
 
-import com.brainbackdoor.auth.HttpHeader.Companion.AUTHORIZATION
-import com.brainbackdoor.auth.HttpServletRequest.Companion.get
+import com.brainbackdoor.web.HttpHeader.Companion.AUTHORIZATION
+import com.brainbackdoor.web.HttpServletRequest.Companion.get
 import com.brainbackdoor.auth.application.AuthService
 import com.brainbackdoor.exception.HasNotPermissionException
+import com.brainbackdoor.web.HttpHeader
+import com.brainbackdoor.web.HttpServletRequestAttributes
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import mu.KotlinLogging
@@ -19,7 +21,7 @@ private val logger = KotlinLogging.logger {}
 @Aspect
 @Order(1)
 @Component
-class RequestAttributesByAdmin(
+class RequestAttributesByAdminAuth(
     objectMapper: ObjectMapper = jacksonObjectMapper(),
     private val authService: AuthService,
 ) : HttpServletRequestAttributes(objectMapper) {

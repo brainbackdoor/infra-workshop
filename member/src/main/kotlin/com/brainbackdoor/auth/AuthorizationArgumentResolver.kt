@@ -1,6 +1,7 @@
 package com.brainbackdoor.auth
 
 import com.brainbackdoor.auth.application.AuthService
+import com.brainbackdoor.web.HttpHeader
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component

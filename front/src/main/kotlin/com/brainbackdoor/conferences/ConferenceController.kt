@@ -2,7 +2,7 @@ package com.brainbackdoor.conferences
 
 import com.brainbackdoor.auth.AdminAuth
 import com.brainbackdoor.auth.LoginMemberClient
-import com.brainbackdoor.web.AuthorizationToken
+import com.brainbackdoor.auth.Auth
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -16,7 +16,7 @@ class ConferenceController(
     @PostMapping
     @AdminAuth
     fun create(
-        @AuthorizationToken token: String,
+        @Auth token: String,
         @RequestBody request: ConferenceRequest,
     ): ResponseEntity<String> {
         val id = conferenceClient.create(token, request)
@@ -35,7 +35,7 @@ class ConferenceController(
     @GetMapping("/all")
     @AdminAuth
     fun findAll(
-        @AuthorizationToken token: String,
+        @Auth token: String,
     ): ResponseEntity<List<ConferenceAllResponse>> =
         ResponseEntity.ok(conferenceClient.findAll(token))
 
@@ -46,7 +46,7 @@ class ConferenceController(
     @PutMapping("/{id}")
     @AdminAuth
     fun update(
-        @AuthorizationToken token: String,
+        @Auth token: String,
         @PathVariable id: String,
         @RequestBody request: ConferenceRequest,
     ): ResponseEntity<ConferenceResponse> =
@@ -59,7 +59,7 @@ class ConferenceController(
     @PutMapping("/{id}/status")
     @AdminAuth
     fun updateStatus(
-        @AuthorizationToken token: String,
+        @Auth token: String,
         @PathVariable id: String,
         @RequestBody request: ConferenceStatusRequest,
     ): ResponseEntity<ConferenceStatusResponse> =
@@ -68,7 +68,7 @@ class ConferenceController(
     @DeleteMapping("/{id}")
     @AdminAuth
     fun delete(
-        @AuthorizationToken token: String,
+        @Auth token: String,
         @PathVariable id: String
     ): ResponseEntity.HeadersBuilder<*> {
         conferenceClient.delete(token, id)
@@ -77,7 +77,7 @@ class ConferenceController(
 
     @PostMapping("/{id}/join")
     fun recruit(
-        @AuthorizationToken token: String,
+        @Auth token: String,
         @PathVariable id: String
     ): ResponseEntity<ConferenceResponse> {
         val memberId = loginMemberClient.findMe(token).id

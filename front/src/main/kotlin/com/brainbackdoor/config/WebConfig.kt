@@ -1,5 +1,6 @@
-package com.brainbackdoor.web
+package com.brainbackdoor.config
 
+import com.brainbackdoor.auth.AuthorizationArgumentResolver
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
 import org.springframework.context.annotation.Configuration

@@ -1,9 +1,11 @@
 package com.brainbackdoor.auth
 
-import com.brainbackdoor.auth.HttpHeader.Companion.AUTHORIZATION
-import com.brainbackdoor.auth.HttpHeader.Companion.auth
-import com.brainbackdoor.auth.HttpServletRequest.Companion.get
+import com.brainbackdoor.auth.AdminAuth
+import com.brainbackdoor.auth.LoginMemberClient
 import com.brainbackdoor.exception.HasNotPermissionException
+import com.brainbackdoor.web.HttpHeader
+import com.brainbackdoor.web.HttpServletRequest
+import com.brainbackdoor.web.HttpServletRequestAttributes
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import mu.KotlinLogging
@@ -18,7 +20,7 @@ private val logger = KotlinLogging.logger {}
 @Aspect
 @Order(1)
 @Component
-class RequestAttributesByAdmin(
+class RequestAttributesByAdminAuth(
     objectMapper: ObjectMapper = jacksonObjectMapper(),
     private val loginMemberClient: LoginMemberClient
 ) : HttpServletRequestAttributes(objectMapper) {
@@ -45,7 +47,7 @@ class RequestAttributesByAdmin(
     private fun loginMember() = loginMemberClient.findMe(token())
 
     fun token(): String {
-        val token = auth(get(), AUTHORIZATION)
+        val token = HttpHeader.auth(HttpServletRequest.get(), HttpHeader.AUTHORIZATION)
         check(!token.isNullOrEmpty()) {
             throw HasNotPermissionException("토큰이 존재하지 않아, 인증을 할 수 없습니다.")
         }

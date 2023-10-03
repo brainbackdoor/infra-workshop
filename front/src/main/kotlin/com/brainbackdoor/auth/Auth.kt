@@ -1,5 +1,5 @@
-package com.brainbackdoor.web
+package com.brainbackdoor.auth
 
 @Target(AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AuthorizationToken
+annotation class Auth

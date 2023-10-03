@@ -1,13 +1,13 @@
-package com.brainbackdoor.auth
+package com.brainbackdoor.web
 
-import com.brainbackdoor.auth.HttpServletRequest.Companion.get
+import com.brainbackdoor.web.HttpServletRequest.Companion.get
 import jakarta.servlet.http.HttpServletRequest
 import javax.naming.AuthenticationException
 
 class HttpHeader {
     companion object {
         const val AUTHORIZATION = "Authorization"
-        const val BEARER_TYPE = "Bearer"
+        private const val BEARER_TYPE = "Bearer"
 
         fun auth(request: HttpServletRequest, header: String): String {
             val token = get().getHeader(header)
