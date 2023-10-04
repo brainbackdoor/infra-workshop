@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service
 @Service
 class EventService {
 
-    fun findMbtiBy(id: String) = events().pick(id)
+    fun findMbtiBy(id: Int) = events().pick(id)
 
 }

@@ -1,5 +1,6 @@
 package com.brainbackdoor.event
 
+import com.brainbackdoor.events.EventController.Companion.convert
 import com.brainbackdoor.events.EventRepository.Companion.events
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +11,7 @@ class EventTest {
     @ParameterizedTest
     @MethodSource("mbti")
     fun `mbti 유형 pick test`(id: String, mbtiId: Long) {
-        val event = events().pick(id)
+        val event = events().pick(convert(id))
         assertThat(event.id).isEqualTo(mbtiId)
     }
 

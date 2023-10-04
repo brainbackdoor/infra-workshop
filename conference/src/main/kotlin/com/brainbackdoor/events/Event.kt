@@ -11,11 +11,9 @@ class Event(
 class Events(
     private val events: MutableList<Event>,
 ) {
-    fun pick(id: String): Event {
-        val index = id.toCharArray()[0].code % 16
-
+    fun pick(id: Int): Event {
         latencyLogic()
-        return events[index]
+        return events[id]
     }
 
     private fun latencyLogic() {
