@@ -36,7 +36,6 @@ class MdcLogInterceptor : HandlerInterceptor {
         const val REQUEST_UUID = "REQUEST_UUID"
         const val REQUEST_USER_AGENT = "REQUEST_USER_AGENT"
         const val REQUEST_IP = "REQUEST_IP"
-        const val REQUEST_URL = "REQUEST_URL"
         const val REQUEST_HANDLER = "HANDLER"
     }
 }
