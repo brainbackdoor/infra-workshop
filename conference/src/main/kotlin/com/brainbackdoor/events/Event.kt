@@ -17,7 +17,7 @@ class Events(
     }
 
     private fun latencyLogic() {
-        var second: Int = 0
+        var second = 0
         timer(period = 1000) {
             second++
             if (second == 5) {

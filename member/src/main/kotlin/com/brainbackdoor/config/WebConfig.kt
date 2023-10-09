@@ -1,6 +1,7 @@
 package com.brainbackdoor.config
 
 import com.brainbackdoor.auth.AuthorizationArgumentResolver
+import com.brainbackdoor.log.MdcLogInterceptor
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
 import org.springframework.context.annotation.Bean
@@ -9,6 +10,7 @@ import org.springframework.format.FormatterRegistry
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
@@ -33,6 +35,10 @@ class WebMvcConfig(
 
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
         resolvers.add(loginUserArgumentResolver)
+    }
+
+    override fun addInterceptors(registry: InterceptorRegistry) {
+        registry.addInterceptor(MdcLogInterceptor())
     }
 
     override fun addFormatters(registry: FormatterRegistry) {
