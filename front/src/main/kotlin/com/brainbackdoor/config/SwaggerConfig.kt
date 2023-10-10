@@ -14,7 +14,7 @@ class SwaggerConfig {
     fun openAPI(): OpenAPI {
         val info = Info()
             .title("Infra-workshop API")
-            .description("<p>인프라공방 실습을 위한 회원(member) API 입니다.</p>")
+            .description("<p>인프라공방 실습을 위한 API 입니다. (BFF 패턴)</p>")
 
         return OpenAPI().components(Components()).info(info)
     }
