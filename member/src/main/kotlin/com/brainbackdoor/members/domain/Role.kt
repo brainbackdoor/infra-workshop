@@ -15,24 +15,10 @@ class Role(
 ) : AutoIncrementId<Role>(id) {
 
     companion object {
-        @JvmStatic
-        fun admin(): Role = Role(RoleType.ROLE_ADMIN)
 
         @JvmStatic
         fun guest(): Role = Role(RoleType.ROLE_GUEST)
     }
-
-    override fun equals(other: Any?): Boolean {
-        return roleType.name == (other as Role).roleType.name
-    }
-
-    override fun hashCode(): Int {
-        var result = super.hashCode()
-        result = 31 * result + roleType.hashCode()
-        return result
-    }
-
-
 }
 
 enum class RoleType {
