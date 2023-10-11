@@ -42,4 +42,16 @@ class AuthAcceptanceTest: AcceptanceTest() {
         val tokenResponse = response.`as`(TokenResponse::class.java)
         assertThat(tokenResponse.email).isEqualTo(ADMIN_EMAIL)
     }
+
+    @Test
+    fun `로그아웃을 한다`() {
+        val response = 로그인_요청(ADMIN_EMAIL, ADMIN_PASSWORD)
+        val myData = 본인_정보_조회_요청(response)
+        회원_정보_조회됨(myData, ADMIN_EMAIL)
+
+        로그아웃_요청(response)
+
+        val fail = 본인_정보_조회_요청(response)
+        assertThat(fail.statusCode()).isEqualTo(HttpStatus.FORBIDDEN.value())
+    }
 }

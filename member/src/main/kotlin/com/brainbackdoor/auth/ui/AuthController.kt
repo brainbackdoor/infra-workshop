@@ -28,7 +28,7 @@ class AuthController(
 
 
     @Operation(summary = "로그아웃")
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     fun logout(@Auth loginMember: LoginMember): ResponseEntity<String> {
         authService.logout(loginMember)
         return ResponseEntity.ok().build()
