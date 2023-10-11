@@ -2,6 +2,7 @@ package com.brainbackdoor.members.acceptance
 
 import com.brainbackdoor.members.ui.MemberCreateRequest
 import com.brainbackdoor.members.ui.MemberResponse
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_TOKEN
 import io.restassured.RestAssured
 import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response
@@ -21,7 +22,9 @@ fun 회원_생성을_요청(
     )
 
     return RestAssured.given().log().all()
-        .contentType(MediaType.APPLICATION_JSON_VALUE).body(params)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .header("Authorization", ADMIN_TOKEN)
+        .body(params)
         .post("/api/members")
         .then().log().all()
         .extract()
@@ -36,6 +39,7 @@ fun 회원_정보_조회_요청(response: ExtractableResponse<Response>): Extrac
 
     return RestAssured.given().log().all()
         .accept(MediaType.APPLICATION_JSON_VALUE)
+        .header("Authorization", ADMIN_TOKEN)
         .get(uri).then().log().all()
         .extract()
 }

@@ -1,5 +1,10 @@
 package com.brainbackdoor.support
 
+import com.brainbackdoor.auth.application.AuthService
+import com.brainbackdoor.auth.ui.LoginRequest
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_EMAIL
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_PASSWORD
+import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_TOKEN
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,6 +28,9 @@ class AcceptanceTest : BaseTest() {
     @Autowired
     private lateinit var testData: InitialTestData
 
+    @Autowired
+    private lateinit var authService: AuthService
+
     @BeforeEach
     fun setUp() {
         if (RestAssured.port == RestAssured.UNDEFINED_PORT) {
@@ -32,5 +40,7 @@ class AcceptanceTest : BaseTest() {
 
         databaseCleanup.execute()
         testData.loadSpecificData()
+
+        ADMIN_TOKEN = authService.login(LoginRequest(ADMIN_EMAIL, ADMIN_PASSWORD)).accessToken
     }
 }

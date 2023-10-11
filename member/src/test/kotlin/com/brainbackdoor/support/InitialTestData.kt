@@ -43,6 +43,7 @@ class InitialTestData : InitialData() {
     companion object {
         const val ADMIN_EMAIL = "test@gmail.com"
         const val ADMIN_PASSWORD = "password1!"
+        var ADMIN_TOKEN = ""
     }
 }
 
