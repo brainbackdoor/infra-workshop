@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
 
-@Tag(name = "ConferenceController", description = "컨퍼런스시스템 API")
+@Tag(name = "ConferenceController", description = "BFF 컨퍼런스 API")
 @RequestMapping("/api/conferences")
 @RestController
 class ConferenceController(
