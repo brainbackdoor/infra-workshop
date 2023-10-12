@@ -68,21 +68,19 @@ class ConferenceService(
     }
 
     private fun ConferenceRequest.of(): Conference {
-        val conference = Conference(
+        return Conference(
             area,
             LocalDateTime.parse(conferenceSchedule),
-            contents,
+            fee,
             Recruitment(
                 Period(
                     LocalDateTime.parse(recruitmentStartDate),
                     LocalDateTime.parse(recruitmentEndDate)
                 ),
-                fee,
-            )
+                Applicants(limited, lotteryBoundary)
+            ),
+            contents
         )
-        conference.recruitment.applicants.limited = limited
-        conference.recruitment.applicants.lotteryBoundary = lotteryBoundary
-        return conference
     }
 
 }

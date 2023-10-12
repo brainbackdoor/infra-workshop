@@ -9,22 +9,13 @@ class Recruitment(
     @Embedded
     var recruitmentPeriod: Period,
 
-    var fee: Int = 0,
+    @Embedded
+    var applicants: Applicants,
 
     @Enumerated(EnumType.STRING)
     var status: RecruitmentStatus = RecruitmentStatus.READY,
 
-    @Embedded
-    var applicants: Applicants = Applicants(),
-) : RandomId<Recruitment>() {
-    fun isBeforeStart(): Boolean = status.ordinal < RecruitmentStatus.START.ordinal
-
-    fun isStarted(): Boolean = status == RecruitmentStatus.START
-
-    fun isStooped(): Boolean = status == RecruitmentStatus.STOP
-
-    fun isFinished(): Boolean = status == RecruitmentStatus.FINISH
-
+    ) : RandomId<Recruitment>() {
     fun start() {
         status = RecruitmentStatus.START
     }
@@ -37,11 +28,22 @@ class Recruitment(
         status = RecruitmentStatus.FINISH
     }
 
-    fun isDone(): Boolean = recruitmentPeriod.isBefore(LocalDateTime.now())
     fun join(applicant: Applicant) {
         check(isStarted()) { throw IllegalArgumentException("모집 중이 아니라, 신청할 수 없습니다.") }
+        check(isDone()) { throw IllegalArgumentException("모집 기간이 아니라서, 신청할 수 없습니다.") }
 
         applicants.join(applicant)
+        if (applicants.isFulled()) {
+            finish()
+        }
+    }
+
+    fun leave(applicant: Applicant) {
+        applicants.leave(applicant)
+
+        if (isJoinable()) {
+            start()
+        }
     }
 
     fun lottery() {
@@ -49,6 +51,28 @@ class Recruitment(
 
         applicants.lottery()
     }
+
+    fun updateLimit(limit: Int) {
+        check(isBeforeStart() || isStopped()) {
+            throw IllegalArgumentException("모집 전 혹은 모집 중단시에만 모집 최대 인원을 수정할 수 있습니다.")
+        }
+
+        applicants.limited = limit
+    }
+
+    fun contains(applicant: Applicant): Boolean = applicants.contains(applicant)
+
+    fun isBeforeStart(): Boolean = status.ordinal < RecruitmentStatus.START.ordinal
+
+    fun isStarted(): Boolean = status == RecruitmentStatus.START
+
+    fun isStopped(): Boolean = status == RecruitmentStatus.STOP
+
+    fun isFinished(): Boolean = status == RecruitmentStatus.FINISH
+
+    fun isJoinable() = !applicants.isFulled() && !isStopped()
+
+    private fun isDone(): Boolean = recruitmentPeriod.isBefore(LocalDateTime.now())
 }
 
 @Embeddable
@@ -56,7 +80,7 @@ class Period(
     var periodStart: LocalDateTime,
     var periodEnd: LocalDateTime,
 ) {
-    fun isBefore(target: LocalDateTime): Boolean = periodEnd.isBefore(target)
+    fun isBefore(target: LocalDateTime): Boolean = target.isBefore(periodEnd)
 
     init {
         check(periodStart.isBefore(periodEnd)) {

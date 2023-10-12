@@ -11,19 +11,28 @@ class Conference(
 
     var schedule: LocalDateTime,
 
-    @Lob
-    var contents: String = "",
+    var fee: Int = 0,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(foreignKey = ForeignKey(name = "fk_conference_to_recruitment"))
     var recruitment: Recruitment,
 
+    @Lob
+    var contents: String = "",
+
+
     ) : RandomId<Conference>() {
+
+    init {
+        check(fee >= 0) {
+            throw IllegalArgumentException("참가비용은 0원 이상이어야 합니다.")
+        }
+    }
     fun isBeforeStart(): Boolean = recruitment.isBeforeStart()
 
     fun isStarted(): Boolean = recruitment.isStarted()
 
-    fun isStooped(): Boolean = recruitment.isStooped()
+    fun isStooped(): Boolean = recruitment.isStopped()
 
     fun isFinished(): Boolean = recruitment.isFinished()
     fun update(conference: Conference): Conference {
@@ -48,9 +57,6 @@ class Conference(
 
     private fun finish() = recruitment.finish()
     fun recruit(applicant: Applicant) {
-        check(isStarted()) { throw IllegalArgumentException("모집 중이 아니라, 신청할 수 없습니다.") }
-        check(!recruitment.isDone()) { throw IllegalArgumentException("모집 기간이 지나 신청할 수 없습니다.") }
-
         recruitment.join(applicant)
     }
 }

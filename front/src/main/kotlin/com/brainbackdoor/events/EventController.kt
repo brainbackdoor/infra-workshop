@@ -17,6 +17,6 @@ class EventController(
     @GetMapping("/mbti/{id}")
     fun findMbtiById(
         @Parameter(name = "id", description = "회원 아이디") @PathVariable id: String
-    ): ResponseEntity<Event> =
+    ): ResponseEntity<EventRequest> =
         ResponseEntity.ok(eventClient.findMbtiBy(id))
 }

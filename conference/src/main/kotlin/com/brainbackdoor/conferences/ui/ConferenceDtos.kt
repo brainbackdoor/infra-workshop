@@ -70,7 +70,7 @@ data class ConferenceResponse(
         conference.area,
         conference.recruitment.applicants.limited,
         conference.recruitment.applicants.lotteryBoundary,
-        conference.recruitment.fee,
+        conference.fee,
         conference.contents,
         conference.recruitment.status
     )
@@ -120,7 +120,7 @@ data class ConferenceAllResponse(
         conference.area,
         conference.recruitment.applicants.limited,
         conference.recruitment.applicants.lotteryBoundary,
-        conference.recruitment.fee,
+        conference.fee,
         conference.contents,
         conference.recruitment.status,
         conference.recruitment.applicants.applicants.map { it.memberId }

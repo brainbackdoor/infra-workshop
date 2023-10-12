@@ -14,7 +14,25 @@ class Applicant(
     @JoinColumn(foreignKey = ForeignKey(name = "fk_applicant_to_recruitment"))
     private var recruitment: Recruitment,
 ) : RandomId<Applicant>() {
+
+
     override fun toString(): String {
         return "Applicant(memberId='$memberId')"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        if (!super.equals(other)) return false
+
+        other as Applicant
+
+        return memberId == other.memberId
+    }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + memberId.hashCode()
+        return result
     }
 }

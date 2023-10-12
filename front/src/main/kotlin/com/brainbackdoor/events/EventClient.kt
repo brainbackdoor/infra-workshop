@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.*
 )
 interface EventClient {
     @GetMapping("/api/events/mbti/{id}")
-    fun findMbtiBy(@PathVariable id: String): Event
+    fun findMbtiBy(@PathVariable id: String): EventRequest
 }

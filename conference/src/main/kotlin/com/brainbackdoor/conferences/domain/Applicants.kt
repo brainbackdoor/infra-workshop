@@ -25,7 +25,17 @@ class Applicants(
         applicants.add(applicant)
     }
 
+    fun leave(applicant: Applicant) {
+        check(contains(applicant)) {
+            throw IllegalArgumentException("등록된 신청자가 아닙니다.")
+        }
+
+        applicants.remove(applicant)
+    }
+
     fun contains(applicant: Applicant): Boolean = applicants.contains(applicant)
+
+    fun isFulled(): Boolean = applicants.size >= limited
     fun lottery() {
         applicants.shuffle()
         applicants.subList(0, lotteryBoundary)
