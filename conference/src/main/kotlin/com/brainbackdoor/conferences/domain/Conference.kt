@@ -27,12 +27,16 @@ class Conference(
         check(fee >= 0) {
             throw IllegalArgumentException("참가비용은 0원 이상이어야 합니다.")
         }
+        check(recruitment.isBefore(schedule)) {
+            throw IllegalArgumentException("컨퍼런스 일정은 모집 기간 후여야 합니다.")
+        }
     }
+
     fun isBeforeStart(): Boolean = recruitment.isBeforeStart()
 
     fun isStarted(): Boolean = recruitment.isStarted()
 
-    fun isStooped(): Boolean = recruitment.isStopped()
+    fun isStopped(): Boolean = recruitment.isStopped()
 
     fun isFinished(): Boolean = recruitment.isFinished()
     fun update(conference: Conference): Conference {
@@ -51,12 +55,14 @@ class Conference(
         }
     }
 
-    private fun start() = recruitment.start()
-
-    private fun stop() = recruitment.stop()
-
-    private fun finish() = recruitment.finish()
     fun recruit(applicant: Applicant) {
         recruitment.join(applicant)
     }
+
+    fun isApplied(applicant: Applicant) : Boolean = recruitment.contains(applicant)
+
+    fun start() = recruitment.start()
+
+    fun stop() = recruitment.stop()
+    fun finish() = recruitment.finish()
 }

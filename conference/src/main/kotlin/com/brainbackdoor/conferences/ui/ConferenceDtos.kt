@@ -14,6 +14,7 @@ data class ConferenceRequest(
 
     @Schema(title = "컨퍼런스 일정")
     val conferenceSchedule: String,
+
     @Schema(title = "컨퍼런스 장소")
     val area: String,
 

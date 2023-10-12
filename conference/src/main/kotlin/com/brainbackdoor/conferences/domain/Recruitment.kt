@@ -30,7 +30,7 @@ class Recruitment(
 
     fun join(applicant: Applicant) {
         check(isStarted()) { throw IllegalArgumentException("모집 중이 아니라, 신청할 수 없습니다.") }
-        check(isDone()) { throw IllegalArgumentException("모집 기간이 아니라서, 신청할 수 없습니다.") }
+        check(!isDone()) { throw IllegalArgumentException("모집 기간이 아니라서, 신청할 수 없습니다.") }
 
         applicants.join(applicant)
         if (applicants.isFulled()) {
@@ -70,7 +70,8 @@ class Recruitment(
 
     fun isFinished(): Boolean = status == RecruitmentStatus.FINISH
 
-    fun isJoinable() = !applicants.isFulled() && !isStopped()
+    fun isBefore(target: LocalDateTime): Boolean = recruitmentPeriod.isBefore(target)
+    private fun isJoinable() = !applicants.isFulled() && !isStopped()
 
     private fun isDone(): Boolean = recruitmentPeriod.isBefore(LocalDateTime.now())
 }
@@ -80,7 +81,7 @@ class Period(
     var periodStart: LocalDateTime,
     var periodEnd: LocalDateTime,
 ) {
-    fun isBefore(target: LocalDateTime): Boolean = target.isBefore(periodEnd)
+    fun isBefore(target: LocalDateTime): Boolean = periodEnd.isBefore(target)
 
     init {
         check(periodStart.isBefore(periodEnd)) {
