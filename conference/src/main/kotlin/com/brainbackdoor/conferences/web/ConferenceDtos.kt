@@ -61,7 +61,7 @@ data class ConferenceResponse(
     val contents: String = "",
 
     @Schema(title = "컨퍼런스 모집 상태")
-    val status: RecruitmentStatus
+    val status: RecruitmentStatus,
 ) {
     constructor(conference: Conference) : this(
         conference.id,
@@ -111,7 +111,7 @@ data class ConferenceAllResponse(
     val status: RecruitmentStatus,
 
     @Schema(title = "참가자")
-    val applicants: List<String>
+    val applicants: List<String>,
 ) {
     constructor(conference: Conference) : this(
         conference.id,
@@ -131,7 +131,7 @@ data class ConferenceAllResponse(
 @Schema(description = "컨퍼런스 모집 상태 요청")
 data class ConferenceStatusRequest(
     @Schema(title = "컨퍼런스 모집 상태")
-    val status: String
+    val status: String,
 )
 
 @Schema(description = "컨퍼런스 모집 상태 응답")
@@ -140,10 +140,16 @@ data class ConferenceStatusResponse(
     val id: String,
 
     @Schema(title = "컨퍼런스 모집 상태")
-    val status: String
+    val status: String,
 ) {
     constructor(conference: Conference) : this(
         conference.id,
         conference.status().name
     )
 }
+
+@Schema(description = "컨퍼런스 참가 요청")
+data class ConferenceJoinRequest(
+    @Schema(title = "회원 아이디")
+    val memberId: String,
+)

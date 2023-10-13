@@ -26,6 +26,7 @@ class ConferenceController(
     }
 
     @Operation(summary = "컨퍼런스 조회")
+    @AdminAuth
     @GetMapping
     fun find(
         @Parameter(name = "schedule", description = "컨퍼런스 일정") @RequestParam schedule: String? = "",
@@ -60,6 +61,7 @@ class ConferenceController(
 
     @Operation(summary = "특정 컨퍼런스 모집 상태 조회")
     @GetMapping("/{id}/status")
+    @AdminAuth
     fun status(
         @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceStatusResponse> =
@@ -86,9 +88,10 @@ class ConferenceController(
 
     @Operation(summary = "특정 컨퍼런스에 참가")
     @PostMapping("/{id}/join")
+    @AdminAuth
     fun recruit(
-        @Parameter(name = "memberId", description = "회원 아이디") @RequestParam memberId: String,
         @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
+        @RequestBody request: ConferenceJoinRequest,
     ): ResponseEntity<ConferenceResponse> =
-        ResponseEntity.ok(conferenceService.recruit(memberId, id))
+        ResponseEntity.ok(conferenceService.recruit(request.memberId, id))
 }

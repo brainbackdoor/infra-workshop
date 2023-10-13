@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query
 fun ConferenceRepository.findAllSortAndFilter(
     schedule: String?, area: String?, status: String?
 ): List<Conference> {
-    var result = findAllSort().filter { it.isStarted() || it.isFinished() }
+    var result = findAllSort()
 
     if (schedule?.isNotEmpty() == true) {
         result = result.filter { it.schedule.toString() == schedule }

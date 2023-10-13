@@ -15,11 +15,6 @@ class Applicant(
     private var recruitment: Recruitment,
 ) : RandomId<Applicant>() {
 
-
-    override fun toString(): String {
-        return "Applicant(memberId='$memberId')"
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -31,7 +31,6 @@ class Conference(
             throw IllegalArgumentException("컨퍼런스 일정은 모집 기간 후여야 합니다.")
         }
     }
-
     fun isBeforeStart(): Boolean = recruitment.isBeforeStart()
 
     fun isStarted(): Boolean = recruitment.isStarted()
@@ -43,6 +42,7 @@ class Conference(
         this.area = conference.area
         this.schedule = conference.schedule
         this.recruitment = conference.recruitment
+        this.fee = conference.fee
         return this
     }
 
@@ -59,7 +59,7 @@ class Conference(
         recruitment.join(applicant)
     }
 
-    fun isApplied(applicant: Applicant) : Boolean = recruitment.contains(applicant)
+    fun isApplied(applicant: Applicant): Boolean = recruitment.contains(applicant)
 
     fun start() = recruitment.start()
 

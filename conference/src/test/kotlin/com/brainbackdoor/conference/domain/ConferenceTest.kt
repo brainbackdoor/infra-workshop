@@ -27,7 +27,7 @@ class ConferenceTest {
         )
 
         assertThrows<IllegalArgumentException> {
-            Conference(area, schedule, fee, Recruitment(period, Applicants(1)))
+            Conference(area, schedule, fee, Recruitment(period, applicants))
         }
     }
 
@@ -89,5 +89,6 @@ class ConferenceTest {
         LocalDateTime.now().minusDays(1L),
         LocalDateTime.of(2123, 10, 9, 23, 59)
     )
-    private val recruitment = Recruitment(period, Applicants(limited = 10))
+    private val applicants = Applicants(limited = 10)
+    private val recruitment = Recruitment(period, applicants)
 }
