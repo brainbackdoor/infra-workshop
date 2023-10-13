@@ -13,9 +13,6 @@ dependencyManagement {
 dependencies {
     api(project(":core"))
 
-    // Spring and Spring Boot dependencies
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-
     // Databases
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -28,4 +25,7 @@ dependencies {
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    implementation("com.google.guava:guava:31.1-jre")
 }

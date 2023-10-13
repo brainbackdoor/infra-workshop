@@ -1,4 +1,4 @@
-package com.brainbackdoor.conferences.ui
+package com.brainbackdoor.conferences.web
 
 import com.brainbackdoor.conferences.domain.Conference
 import com.brainbackdoor.conferences.domain.RecruitmentStatus
@@ -21,14 +21,14 @@ data class ConferenceRequest(
     @Schema(title = "모집 최대 인원")
     val limited: Int,
 
-    @Schema(title = "추첨 인원")
-    var lotteryBoundary: Int,
-
     @Schema(title = "컨퍼런스 참가 비용")
     val fee: Int,
 
     @Schema(title = "컨퍼런스 내용")
-    val contents: String = ""
+    val contents: String = "",
+
+    @Schema(title = "추첨 인원")
+    var lotteryBoundary: Int = 0,
 )
 
 @Schema(description = "컨퍼런스 응답")

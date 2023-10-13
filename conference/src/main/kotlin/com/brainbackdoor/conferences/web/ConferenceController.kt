@@ -1,4 +1,4 @@
-package com.brainbackdoor.conferences.ui
+package com.brainbackdoor.conferences.web
 
 import com.brainbackdoor.auth.AdminAuth
 import com.brainbackdoor.conferences.application.ConferenceService
@@ -15,7 +15,6 @@ import java.net.URI
 class ConferenceController(
     private val conferenceService: ConferenceService,
 ) {
-
     @Operation(summary = "컨퍼런스 생성")
     @PostMapping
     @AdminAuth
@@ -23,7 +22,7 @@ class ConferenceController(
         @RequestBody request: ConferenceRequest,
     ): ResponseEntity<String> {
         val id = conferenceService.create(request).id
-        return ResponseEntity.ok(id)
+        return ResponseEntity.created(URI.create("/api/conferences/$id")).build()
     }
 
     @Operation(summary = "컨퍼런스 조회")
@@ -46,7 +45,7 @@ class ConferenceController(
     @Operation(summary = "특정 컨퍼런스 조회")
     @GetMapping("/{id}")
     fun findById(
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceResponse> =
         ResponseEntity.ok(conferenceService.findById(id))
 
@@ -62,7 +61,7 @@ class ConferenceController(
     @Operation(summary = "특정 컨퍼런스 모집 상태 조회")
     @GetMapping("/{id}/status")
     fun status(
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceStatusResponse> =
         ResponseEntity.ok(conferenceService.status(id))
 
@@ -79,7 +78,7 @@ class ConferenceController(
     @DeleteMapping("/{id}")
     @AdminAuth
     fun delete(
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity.HeadersBuilder<*> {
         conferenceService.delete(id)
         return ResponseEntity.noContent()
@@ -89,7 +88,7 @@ class ConferenceController(
     @PostMapping("/{id}/join")
     fun recruit(
         @Parameter(name = "memberId", description = "회원 아이디") @RequestParam memberId: String,
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceResponse> =
         ResponseEntity.ok(conferenceService.recruit(memberId, id))
 }

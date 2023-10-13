@@ -9,8 +9,6 @@ dependencies {
 
     // Spring and Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("com.google.guava:guava:31.1-jre")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt:0.9.1")
@@ -26,4 +24,7 @@ dependencies {
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
+    implementation("com.google.guava:guava:31.1-jre")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
