@@ -30,32 +30,9 @@
 
 ## 🚀 Getting Started
 
----
+### 1. 로컬 DB 구성
 
-### 1. ktlint 설정
-
-```
-./gradlew ktlintApplyToIdea
-mkdir .git/hooks
-./gradlew addKtlintCheckGitPreCommitHook
-```
-
----
-
-### 2.️ 로컬 서버 시작시 config location 설정
-
-- IntelliJ -> Run -> Edit Configurations...
-- org.mensakorea.Applicaion.kt 추가 또는 선택 후 VM Options에 다음 설정 추가
-
-```
--Dspring.config.location=classpath:/config/
-```
-
-- Test 수행을 위하여 Template -> JUnit 선택 후 VM options에도 추가
-
----
-
-### 3. 로컬 DB 구성
+#### 준비
 
 - [도커 다운로드](https://www.docker.com/products/docker-desktop)
 - `[module]/docker/db/mysql/init`에 dump 파일을 넣은 상태로 실행하면 자동 INSERT
@@ -65,13 +42,28 @@ mkdir .git/hooks
 1. IntelliJ IDEA에서 `docker-compose.yml`로 이동 후, Run 버튼 클릭
 2. 혹은 프로젝트 디렉터리에서 아래의 명령어를 터미널에 입력
 
-```bash
-# 가령 member 모듈의 경우,
-cd member/docker
-docker-compose up -d
-```
+    ```bash
+    # 가령 member 모듈의 경우,
+    cd member/docker
+    docker-compose up -d
+    ```
 
----
+<br>
+
+### 2.️ 로컬 서버 시작시 config location 설정
+
+- IntelliJ -> Run -> Edit Configurations...
+- com.brainbackdoor.xxApplicaion.kt 추가 또는 선택 후 VM Options에 다음 설정 추가
+
+    ```
+    -Dspring.config.location=classpath:/config/
+    ```
+
+- Test 수행을 위하여 Template -> JUnit 선택 후 VM options에도 추가
+
+
+
+<br>
 
 <br>
 
