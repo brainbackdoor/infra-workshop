@@ -107,3 +107,9 @@ data class ConferenceStatusResponse(
     @Schema(title = "컨퍼런스 모집 상태")
     val status: String
 )
+
+@Schema(description = "컨퍼런스 참가 요청")
+data class ConferenceJoinRequest(
+    @Schema(title = "회원 아이디")
+    val memberId: String,
+)

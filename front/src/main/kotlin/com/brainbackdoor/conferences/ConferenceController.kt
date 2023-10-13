@@ -2,10 +2,10 @@ package com.brainbackdoor.conferences
 
 import com.brainbackdoor.auth.AdminAuth
 import com.brainbackdoor.auth.LoginMemberClient
-import com.brainbackdoor.auth.Auth
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -15,17 +15,18 @@ import java.net.URI
 @RestController
 class ConferenceController(
     private val conferenceClient: ConferenceClient,
-    private val loginMemberClient: LoginMemberClient
+    private val loginMemberClient: LoginMemberClient,
 ) {
+    @Value("\${auth.secret-key}")
+    private val secretKey: String = ""
 
     @Operation(summary = "컨퍼런스 생성")
     @PostMapping
     @AdminAuth
     fun create(
-        @Auth token: String,
         @RequestBody request: ConferenceRequest,
     ): ResponseEntity<String> {
-        val id = conferenceClient.create(token, request)
+        val id = conferenceClient.create(secretKey, request)
         return ResponseEntity.created(URI.create("/api/conferences/$id")).build()
     }
 
@@ -36,70 +37,65 @@ class ConferenceController(
         @Parameter(name = "area", description = "컨퍼런스 장소") @RequestParam area: String? = "",
         @Parameter(name = "status", description = "컨퍼런스 모집 상태") @RequestParam status: String? = "",
     ): ResponseEntity<List<ConferenceResponse>> {
-        return ResponseEntity.ok(conferenceClient.findBy(schedule, area, status))
+        return ResponseEntity.ok(conferenceClient.findBy(secretKey, schedule, area, status))
     }
 
     @Operation(summary = "전체 컨퍼런스 조회")
     @GetMapping("/all")
     @AdminAuth
     fun findAll(
-        @Auth token: String,
     ): ResponseEntity<List<ConferenceAllResponse>> =
-        ResponseEntity.ok(conferenceClient.findAll(token))
+        ResponseEntity.ok(conferenceClient.findAll(secretKey))
 
     @Operation(summary = "특정 컨퍼런스 조회")
     @GetMapping("/{id}")
     fun findById(
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceResponse> =
-        ResponseEntity.ok(conferenceClient.findById(id))
+        ResponseEntity.ok(conferenceClient.findById(secretKey, id))
 
     @Operation(summary = "특정 컨퍼런스 수정")
     @PutMapping("/{id}")
     @AdminAuth
     fun update(
-        @Auth token: String,
         @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
         @RequestBody request: ConferenceRequest,
     ): ResponseEntity<ConferenceResponse> =
-        ResponseEntity.ok(conferenceClient.update(token, id, request))
+        ResponseEntity.ok(conferenceClient.update(secretKey, id, request))
 
     @Operation(summary = "특정 컨퍼런스 모집 상태 조회")
     @GetMapping("/{id}/status")
     fun status(
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceStatusResponse> =
-        ResponseEntity.ok(conferenceClient.status(id))
+        ResponseEntity.ok(conferenceClient.status(secretKey, id))
 
     @Operation(summary = "특정 컨퍼런스 모집 상태 수정")
     @PutMapping("/{id}/status")
     @AdminAuth
     fun updateStatus(
-        @Auth token: String,
         @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
         @RequestBody request: ConferenceStatusRequest,
     ): ResponseEntity<ConferenceStatusResponse> =
-        ResponseEntity.ok(conferenceClient.updateStatus(token, id, request))
+        ResponseEntity.ok(conferenceClient.updateStatus(secretKey, id, request))
 
     @Operation(summary = "특정 컨퍼런스 삭제")
     @DeleteMapping("/{id}")
     @AdminAuth
     fun delete(
-        @Auth token: String,
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity.HeadersBuilder<*> {
-        conferenceClient.delete(token, id)
+        conferenceClient.delete(secretKey, id)
         return ResponseEntity.noContent()
     }
 
     @Operation(summary = "특정 컨퍼런스에 참가")
     @PostMapping("/{id}/join")
     fun recruit(
-        @Auth token: String,
-        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String
+        @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceResponse> {
-        val memberId = loginMemberClient.findMe(token).id
-        return ResponseEntity.ok(conferenceClient.recruit(memberId, id))
+        val request = ConferenceJoinRequest(loginMemberClient.findMe(secretKey).id)
+        return ResponseEntity.ok(conferenceClient.recruit(secretKey, request, id))
     }
 
 }

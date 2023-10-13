@@ -17,6 +17,7 @@ interface ConferenceClient {
 
     @GetMapping("/api/conferences")
     fun findBy(
+        @RequestHeader(AUTHORIZATION) token: String,
         @RequestParam schedule: String?,
         @RequestParam area: String?,
         @RequestParam status: String?,
@@ -26,7 +27,10 @@ interface ConferenceClient {
     fun findAll(@RequestHeader(AUTHORIZATION) token: String): List<ConferenceAllResponse>
 
     @GetMapping("/api/conferences/{id}")
-    fun findById(@PathVariable id: String): ConferenceResponse
+    fun findById(
+        @RequestHeader(AUTHORIZATION) token: String,
+        @PathVariable id: String,
+    ): ConferenceResponse
 
     @PutMapping("/api/conferences/{id}")
     fun update(
@@ -37,7 +41,10 @@ interface ConferenceClient {
 
 
     @GetMapping("/api/conferences/{id}/status")
-    fun status(@PathVariable id: String): ConferenceStatusResponse
+    fun status(
+        @RequestHeader(AUTHORIZATION) token: String,
+        @PathVariable id: String,
+    ): ConferenceStatusResponse
 
 
     @PutMapping("/api/conferences/{id}/status")
@@ -50,13 +57,13 @@ interface ConferenceClient {
     @DeleteMapping("/api/conferences/{id}")
     fun delete(
         @RequestHeader(AUTHORIZATION) token: String,
-        @PathVariable id: String
+        @PathVariable id: String,
     )
 
     @PostMapping("/api/conferences/{id}/join")
     fun recruit(
-        @RequestParam memberId: String,
-        @PathVariable id: String
+        @RequestHeader(AUTHORIZATION) token: String,
+        @RequestBody request: ConferenceJoinRequest,
+        @PathVariable id: String,
     ): ConferenceResponse
-
 }

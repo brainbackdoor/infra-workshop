@@ -17,3 +17,6 @@ external:
     host: http://localhost:8081
   login-member:
     host: http://localhost:8080
+
+auth:
+  secret-key: secret-key
