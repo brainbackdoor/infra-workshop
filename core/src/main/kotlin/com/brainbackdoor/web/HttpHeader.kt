@@ -11,7 +11,7 @@ class HttpHeader {
 
         fun auth(request: HttpServletRequest, header: String): String {
             val token = get().getHeader(header)
-            check(!token.isNullOrEmpty()) {
+            check(hasAuthorization(request) || !token.isNullOrEmpty()) {
                 throw AuthenticationException("인증과 관련된 HTTP 헤더가 존재하지 않습니다.")
             }
 
@@ -25,7 +25,7 @@ class HttpHeader {
             token
         }
 
-        fun hasAuthorization(request: HttpServletRequest): Boolean = request.getHeaders(AUTHORIZATION).hasMoreElements()
+        private fun hasAuthorization(request: HttpServletRequest): Boolean = request.getHeaders(AUTHORIZATION).hasMoreElements()
 
         private fun bearerType(value: String): String {
             val authHeaderValue = value.substring(BEARER_TYPE.length).trim { it <= ' ' }
