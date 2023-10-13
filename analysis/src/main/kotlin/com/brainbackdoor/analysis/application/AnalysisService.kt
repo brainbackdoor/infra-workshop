@@ -1,10 +1,10 @@
 package com.brainbackdoor.analysis.application
 
 import com.brainbackdoor.analysis.domain.AnalysisDao
-import com.brainbackdoor.analysis.ui.CodingAsHobbyResponse
-import com.brainbackdoor.analysis.ui.LectureNameOrderSurveyIdResponse
-import com.brainbackdoor.analysis.ui.LecturesByParticipantsResponse
-import com.brainbackdoor.analysis.ui.MemberByInfraWorkshopResponse
+import com.brainbackdoor.analysis.web.CodingAsHobbyResponse
+import com.brainbackdoor.analysis.web.LectureNameOrderSurveyIdResponse
+import com.brainbackdoor.analysis.web.LecturesByParticipantsResponse
+import com.brainbackdoor.analysis.web.MemberByInfraWorkshopResponse
 import org.springframework.stereotype.Service
 
 @Service

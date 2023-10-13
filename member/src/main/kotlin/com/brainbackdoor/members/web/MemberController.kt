@@ -1,4 +1,4 @@
-package com.brainbackdoor.members.ui
+package com.brainbackdoor.members.web
 
 import com.brainbackdoor.auth.AdminAuth
 import com.brainbackdoor.members.application.MemberService

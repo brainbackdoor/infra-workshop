@@ -1,4 +1,4 @@
-package com.brainbackdoor.analysis.ui
+package com.brainbackdoor.analysis.web
 
 import com.brainbackdoor.analysis.application.AnalysisService
 import com.brainbackdoor.auth.AdminAuth

@@ -1,7 +1,7 @@
 package com.brainbackdoor.conferences.application
 
 import com.brainbackdoor.conferences.domain.*
-import com.brainbackdoor.conferences.ui.*
+import com.brainbackdoor.conferences.web.*
 import com.brainbackdoor.exception.ResourceNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service

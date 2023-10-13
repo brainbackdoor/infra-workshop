@@ -11,7 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
 
 @Component
-class AuthorizationArgumentResolver(
+class AuthArgumentResolverService(
     private val authService: AuthService
 ) : HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean =

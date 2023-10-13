@@ -1,6 +1,6 @@
 package com.brainbackdoor.auth.acceptance
 
-import com.brainbackdoor.auth.ui.TokenResponse
+import com.brainbackdoor.auth.web.TokenResponse
 import com.brainbackdoor.support.AcceptanceTest
 import com.brainbackdoor.members.acceptance.회원_정보_조회됨
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_EMAIL

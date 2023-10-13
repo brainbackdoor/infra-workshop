@@ -11,7 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
 
 @Component
-class AuthorizationArgumentResolver: HandlerMethodArgumentResolver {
+class AuthArgumentResolverService : HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean =
         parameter.hasParameterAnnotation(Auth::class.java)
 
@@ -19,7 +19,7 @@ class AuthorizationArgumentResolver: HandlerMethodArgumentResolver {
         parameter: MethodParameter,
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
-        binderFactory: WebDataBinderFactory?
+        binderFactory: WebDataBinderFactory?,
     ): Any? {
         return HttpHeader.auth(get(), AUTHORIZATION)
     }

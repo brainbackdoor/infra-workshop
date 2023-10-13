@@ -15,12 +15,13 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
+
 @Aspect
 @Order(1)
 @Component
-class RequestAttributesByAdminAuth(
+class AdminAuthAopServiceForFront(
     objectMapper: ObjectMapper = jacksonObjectMapper(),
-    private val loginMemberClient: LoginMemberClient
+    private val loginMemberClient: LoginMemberClient,
 ) : HttpServletRequestAttributes(objectMapper) {
 
     @Before("@annotation(com.brainbackdoor.auth.AdminAuth)")

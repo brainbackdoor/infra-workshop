@@ -1,6 +1,6 @@
 package com.brainbackdoor.config
 
-import com.brainbackdoor.auth.AuthorizationArgumentResolver
+import com.brainbackdoor.auth.AuthArgumentResolverService
 import com.brainbackdoor.log.MdcLogInterceptor
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
@@ -12,11 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 class WebMvcConfig(
-    private val authorizationArgumentResolver: AuthorizationArgumentResolver,
+    private val authArgumentResolverService: AuthArgumentResolverService,
 ) : WebMvcConfigurer {
 
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
-        resolvers.add(authorizationArgumentResolver)
+        resolvers.add(authArgumentResolverService)
     }
 
     override fun addInterceptors(registry: InterceptorRegistry) {

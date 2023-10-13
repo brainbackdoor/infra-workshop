@@ -1,16 +1,13 @@
 package com.brainbackdoor.members.acceptance
 
-import com.brainbackdoor.members.ui.MemberCreateRequest
-import com.brainbackdoor.members.ui.MemberResponse
+import com.brainbackdoor.members.web.MemberCreateRequest
 import com.brainbackdoor.support.AcceptanceTest
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_PASSWORD
 import io.restassured.RestAssured
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import javax.naming.AuthenticationException
 
 class MemberAcceptanceTest : AcceptanceTest() {
     @Test

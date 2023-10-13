@@ -1,4 +1,4 @@
-package com.brainbackdoor.members.ui
+package com.brainbackdoor.members.web
 
 import com.brainbackdoor.members.domain.Member
 import io.swagger.v3.oas.annotations.media.Schema

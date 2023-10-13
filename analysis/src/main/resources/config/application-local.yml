@@ -25,7 +25,5 @@ logging:
             sql:
               BasicBinder: DEBUG
 
-external:
-  login-member:
-    host: http://localhost:8080
-
+auth:
+  secret-key: secret-key

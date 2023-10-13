@@ -3,8 +3,8 @@ package com.brainbackdoor.auth.application
 import com.brainbackdoor.auth.domain.LoginMember
 import com.brainbackdoor.auth.domain.LoginToken
 import com.brainbackdoor.auth.domain.LoginTokenRepository
-import com.brainbackdoor.auth.ui.LoginRequest
-import com.brainbackdoor.auth.ui.TokenResponse
+import com.brainbackdoor.auth.web.LoginRequest
+import com.brainbackdoor.auth.web.TokenResponse
 import com.brainbackdoor.members.application.MemberService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service

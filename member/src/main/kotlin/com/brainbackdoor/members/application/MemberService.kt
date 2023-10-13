@@ -1,8 +1,8 @@
 package com.brainbackdoor.members.application
 
 import com.brainbackdoor.members.domain.*
-import com.brainbackdoor.members.ui.MemberCreateRequest
-import com.brainbackdoor.members.ui.MemberResponse
+import com.brainbackdoor.members.web.MemberCreateRequest
+import com.brainbackdoor.members.web.MemberResponse
 import com.brainbackdoor.exception.ResourceNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service

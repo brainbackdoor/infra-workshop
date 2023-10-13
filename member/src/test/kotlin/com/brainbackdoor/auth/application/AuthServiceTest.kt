@@ -1,7 +1,7 @@
 package com.brainbackdoor.auth.application
 
 import com.brainbackdoor.auth.domain.LoginMember
-import com.brainbackdoor.auth.ui.LoginRequest
+import com.brainbackdoor.auth.web.LoginRequest
 import com.brainbackdoor.support.AcceptanceTest
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_EMAIL
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_PASSWORD

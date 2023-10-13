@@ -1,4 +1,4 @@
-package com.brainbackdoor.auth.ui
+package com.brainbackdoor.auth.web
 
 import io.swagger.v3.oas.annotations.media.Schema
 

@@ -1,10 +1,10 @@
 package com.brainbackdoor.auth
 
-import com.brainbackdoor.auth.AdminAuth
-import com.brainbackdoor.auth.LoginMemberClient
+import com.brainbackdoor.auth.application.AuthService
 import com.brainbackdoor.exception.HasNotPermissionException
 import com.brainbackdoor.web.HttpHeader
-import com.brainbackdoor.web.HttpServletRequest
+import com.brainbackdoor.web.HttpHeader.Companion.AUTHORIZATION
+import com.brainbackdoor.web.HttpServletRequest.Companion.get
 import com.brainbackdoor.web.HttpServletRequestAttributes
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -17,12 +17,13 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
+
 @Aspect
 @Order(1)
 @Component
-class RequestAttributesByAdminAuth(
+class AdminAuthAopServiceForMember(
     objectMapper: ObjectMapper = jacksonObjectMapper(),
-    private val loginMemberClient: LoginMemberClient
+    private val authService: AuthService,
 ) : HttpServletRequestAttributes(objectMapper) {
 
     @Before("@annotation(com.brainbackdoor.auth.AdminAuth)")
@@ -44,14 +45,8 @@ class RequestAttributesByAdminAuth(
     private fun annotation(joinPoint: JoinPoint): AdminAuth =
         (joinPoint.signature as MethodSignature).method.getAnnotation(AdminAuth::class.java)
 
-    private fun loginMember() = loginMemberClient.findMe(token())
+    private fun loginMember() = authService.findLoginMemberBy(token())
 
-    fun token(): String {
-        val token = HttpHeader.auth(HttpServletRequest.get(), HttpHeader.AUTHORIZATION)
-        check(!token.isNullOrEmpty()) {
-            throw HasNotPermissionException("토큰이 존재하지 않아, 인증을 할 수 없습니다.")
-        }
+    private fun token(): String = HttpHeader.auth(get(), AUTHORIZATION)
 
-        return token
-    }
 }

@@ -1,6 +1,6 @@
 package com.brainbackdoor.members.application
 
-import com.brainbackdoor.members.ui.MemberCreateRequest
+import com.brainbackdoor.members.web.MemberCreateRequest
 import com.brainbackdoor.support.AcceptanceTest
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_EMAIL
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_PASSWORD

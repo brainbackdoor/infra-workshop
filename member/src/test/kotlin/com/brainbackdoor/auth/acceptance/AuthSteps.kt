@@ -1,7 +1,7 @@
 package com.brainbackdoor.auth.acceptance
 
-import com.brainbackdoor.auth.ui.LoginRequest
-import com.brainbackdoor.auth.ui.TokenResponse
+import com.brainbackdoor.auth.web.LoginRequest
+import com.brainbackdoor.auth.web.TokenResponse
 import io.restassured.RestAssured
 import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response

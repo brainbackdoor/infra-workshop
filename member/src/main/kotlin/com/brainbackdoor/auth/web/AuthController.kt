@@ -1,4 +1,4 @@
-package com.brainbackdoor.auth.ui
+package com.brainbackdoor.auth.web
 
 import com.brainbackdoor.auth.Auth
 import com.brainbackdoor.auth.application.AuthService

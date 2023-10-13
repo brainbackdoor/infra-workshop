@@ -1,7 +1,7 @@
 package com.brainbackdoor.members.acceptance
 
-import com.brainbackdoor.members.ui.MemberCreateRequest
-import com.brainbackdoor.members.ui.MemberResponse
+import com.brainbackdoor.members.web.MemberCreateRequest
+import com.brainbackdoor.members.web.MemberResponse
 import com.brainbackdoor.support.InitialTestData.Companion.ADMIN_TOKEN
 import io.restassured.RestAssured
 import io.restassured.response.ExtractableResponse

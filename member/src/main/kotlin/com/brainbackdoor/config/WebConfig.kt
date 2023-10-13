@@ -1,6 +1,6 @@
 package com.brainbackdoor.config
 
-import com.brainbackdoor.auth.AuthorizationArgumentResolver
+import com.brainbackdoor.auth.AuthArgumentResolverService
 import com.brainbackdoor.log.MdcLogInterceptor
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
@@ -30,7 +30,7 @@ class WebSecurityConfig {
 
 @Configuration
 class WebMvcConfig(
-    private val loginUserArgumentResolver: AuthorizationArgumentResolver,
+    private val loginUserArgumentResolver: AuthArgumentResolverService,
 ) : WebMvcConfigurer {
 
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {

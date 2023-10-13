@@ -1,9 +1,9 @@
 package com.brainbackdoor.analysis.domain
 
-import com.brainbackdoor.analysis.ui.CodingAsHobbyResponse
-import com.brainbackdoor.analysis.ui.LectureNameOrderSurveyIdResponse
-import com.brainbackdoor.analysis.ui.LecturesByParticipantsResponse
-import com.brainbackdoor.analysis.ui.MemberByInfraWorkshopResponse
+import com.brainbackdoor.analysis.web.CodingAsHobbyResponse
+import com.brainbackdoor.analysis.web.LectureNameOrderSurveyIdResponse
+import com.brainbackdoor.analysis.web.LecturesByParticipantsResponse
+import com.brainbackdoor.analysis.web.MemberByInfraWorkshopResponse
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
 import org.springframework.stereotype.Repository
