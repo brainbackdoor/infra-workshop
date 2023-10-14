@@ -26,6 +26,11 @@ dependencies {
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
+    // Cache
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.1")
+
+    // Utils
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     implementation("com.google.guava:guava:31.1-jre")
 }

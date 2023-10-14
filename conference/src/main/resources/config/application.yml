@@ -4,3 +4,6 @@ spring:
 
 logging:
   config: classpath:config/logback-${spring.profiles.active}.xml
+
+cache:
+  refresh-time-seconds: 3600
