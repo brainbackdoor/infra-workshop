@@ -14,9 +14,10 @@ class Applicants(
     val applicants: MutableList<Applicant> = mutableListOf()
 ) {
     fun join(applicant: Applicant) {
-        check(applicants.size < limited) {
-            throw IllegalArgumentException("모집 정원이 차서 신청할 수 없습니다.")
+        check(applicants.size < limited && isFirstComeFirstServed()) {
+            throw IllegalArgumentException("선착순 모집에서 모집 정원이 차서 더이상 신청할 수 없습니다.")
         }
+
 
         check(!contains(applicant)) {
             throw IllegalArgumentException("신청자가 하나의 모집에 두번 신청할 수 없습니다.")
@@ -36,8 +37,10 @@ class Applicants(
     fun contains(applicant: Applicant): Boolean = applicants.contains(applicant)
 
     fun isFulled(): Boolean = applicants.size >= limited
+
     fun lottery() {
         applicants.shuffle()
         applicants.subList(0, lotteryBoundary)
     }
+    private fun isFirstComeFirstServed() = lotteryBoundary == 0
 }
