@@ -20,3 +20,4 @@ external:
 
 auth:
   secret-key: secret-key
+

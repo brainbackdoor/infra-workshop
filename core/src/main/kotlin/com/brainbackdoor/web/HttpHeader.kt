@@ -18,14 +18,16 @@ class HttpHeader {
             return token(token, request)
         }
 
-        fun token(token: String, request: HttpServletRequest) = if (isBearerType(token)) {
-            request.setAttribute(HttpHeader::class.java.simpleName + ".ACCESS_TOKEN_TYPE", BEARER_TYPE)
-            bearerType(token)
-        } else {
-            token
-        }
+        fun token(token: String, request: HttpServletRequest) =
+            if (isBearerType(token)) {
+                request.setAttribute(HttpHeader::class.java.simpleName + ".ACCESS_TOKEN_TYPE", BEARER_TYPE)
+                bearerType(token)
+            } else {
+                token
+            }
 
-        private fun hasAuthorization(request: HttpServletRequest): Boolean = request.getHeaders(AUTHORIZATION).hasMoreElements()
+        private fun hasAuthorization(request: HttpServletRequest): Boolean =
+            request.getHeaders(AUTHORIZATION).hasMoreElements()
 
         private fun bearerType(value: String): String {
             val authHeaderValue = value.substring(BEARER_TYPE.length).trim { it <= ' ' }

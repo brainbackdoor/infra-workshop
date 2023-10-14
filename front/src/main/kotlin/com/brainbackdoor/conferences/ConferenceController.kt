@@ -1,6 +1,7 @@
 package com.brainbackdoor.conferences
 
 import com.brainbackdoor.auth.AdminAuth
+import com.brainbackdoor.auth.Auth
 import com.brainbackdoor.auth.LoginMemberClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -92,9 +93,10 @@ class ConferenceController(
     @Operation(summary = "특정 컨퍼런스에 참가")
     @PostMapping("/{id}/join")
     fun recruit(
+        @Auth token: String,
         @Parameter(name = "id", description = "컨퍼런스 식별자") @PathVariable id: String,
     ): ResponseEntity<ConferenceResponse> {
-        val request = ConferenceJoinRequest(loginMemberClient.findMe(secretKey).id)
+        val request = ConferenceJoinRequest(loginMemberClient.findMe(token).id)
         return ResponseEntity.ok(conferenceClient.recruit(secretKey, request, id))
     }
 

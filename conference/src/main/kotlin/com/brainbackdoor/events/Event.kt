@@ -1,6 +1,6 @@
 package com.brainbackdoor.events
 
-import kotlin.concurrent.timer
+import com.brainbackdoor.support.delay
 
 class Event(
     val id: Long,
@@ -17,12 +17,6 @@ class Events(
     }
 
     private fun latencyLogic() {
-        var second = 0
-        timer(period = 1000) {
-            second++
-            if (second == 5) {
-                cancel()
-            }
-        }
+        delay(5000L)
     }
 }

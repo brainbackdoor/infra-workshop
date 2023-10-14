@@ -1,18 +1,25 @@
 package com.brainbackdoor.members.application
 
-import com.brainbackdoor.members.domain.*
+import com.brainbackdoor.exception.ResourceNotFoundException
+import com.brainbackdoor.members.domain.Member
+import com.brainbackdoor.members.domain.MemberRepository
+import com.brainbackdoor.members.domain.Role
+import com.brainbackdoor.members.domain.RoleRepository
+import com.brainbackdoor.members.domain.RoleType
 import com.brainbackdoor.members.web.MemberCreateRequest
 import com.brainbackdoor.members.web.MemberResponse
-import com.brainbackdoor.exception.ResourceNotFoundException
+import com.brainbackdoor.notifications.NotificationService
+import com.brainbackdoor.notifications.SendMailEvent
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
-
 
 @Service
 @Transactional
 class MemberService(
     private val memberRepository: MemberRepository,
-    private val roleRepository: RoleRepository
+    private val roleRepository: RoleRepository,
+    private val notificationService: NotificationService,
+    // private val eventPublisher: ApplicationEventPublisher
 ) {
     fun create(request: MemberCreateRequest): MemberResponse {
         check(request.consentByMember && request.consentByPrivacy) {
@@ -20,6 +27,8 @@ class MemberService(
         }
 
         val member = create(request.of())
+        notificationService.send(SendMailEvent(request.email, MAIL_SUBJECTS, MAIL_CONTENTS))
+        // eventPublisher.publishEvent(SendMailEvent(request.email, MAIL_SUBJECTS, MAIL_CONTENTS))
         return MemberResponse(member)
     }
 
@@ -47,6 +56,11 @@ class MemberService(
     }
 
     fun create(member: Member): Member = memberRepository.save(member)
+
+    companion object {
+        const val MAIL_SUBJECTS = "인프라공방에 참여하신걸 환영합니다!"
+        const val MAIL_CONTENTS = "회원가입이 완료되었습니다"
+    }
 
     private fun MemberCreateRequest.of(): Member =
         Member(

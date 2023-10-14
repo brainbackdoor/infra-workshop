@@ -1,8 +1,8 @@
 package com.brainbackdoor.members.domain
 
-import com.brainbackdoor.members.domain.Password
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -28,6 +28,6 @@ class PasswordTest {
     @ValueSource(strings = ["password", "1p!", "password1", "password!", "1234567!", "12345678", "!@#$%^&*"])
     fun `하나 이상의 숫자 및 소문자와 특수 문자를 모두 포함해야 한다`(password: String) {
         assertThrows<IllegalArgumentException> { Password(password) }
-        org.junit.jupiter.api.assertDoesNotThrow { Password("password1!") }
+        assertDoesNotThrow { Password("password1!") }
     }
 }

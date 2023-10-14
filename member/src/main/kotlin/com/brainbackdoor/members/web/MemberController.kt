@@ -18,7 +18,6 @@ class MemberController(
 
     @Operation(summary = "회원 생성")
     @PostMapping
-    @AdminAuth
     fun create(
         @RequestBody request: MemberCreateRequest,
     ): ResponseEntity<String> {
