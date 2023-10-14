@@ -9,6 +9,7 @@ dependencies {
 
     // Spring and Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter-security")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt:0.9.1")
@@ -27,4 +28,7 @@ dependencies {
 
     implementation("com.google.guava:guava:31.1-jre")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+
+    // Mail
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 }

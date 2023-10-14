@@ -21,7 +21,7 @@ class MemberAcceptanceTest : AcceptanceTest() {
     }
 
     @Test
-    fun `관리자만 회원생성이 가능하다`() {
+    fun `관리자가 아니더라도 회원생성이 가능하다`() {
         val params = MemberCreateRequest(
             "sample@gmail.com",
             ADMIN_PASSWORD,
@@ -35,6 +35,6 @@ class MemberAcceptanceTest : AcceptanceTest() {
             .post("/api/members")
             .then().log().all().extract()
 
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.FORBIDDEN.value())
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value())
     }
 }

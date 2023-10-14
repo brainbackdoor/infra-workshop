@@ -2,11 +2,16 @@ package com.brainbackdoor.config
 
 import com.brainbackdoor.auth.AuthArgumentResolverService
 import com.brainbackdoor.log.MdcLogInterceptor
+import com.brainbackdoor.notifications.Mail
+import com.brainbackdoor.notifications.MailProperties
+import com.brainbackdoor.notifications.Notification
 import com.brainbackdoor.support.LocalDateConverter
 import com.brainbackdoor.support.LocalDateTimeConverter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.format.FormatterRegistry
+import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
@@ -45,4 +50,13 @@ class WebMvcConfig(
         registry.addConverter(LocalDateConverter())
         registry.addConverter(LocalDateTimeConverter())
     }
+}
+
+@Bean
+@Profile("local", "prod")
+fun nsMailSenderNotTestProfile(
+    javaMailSender: JavaMailSender,
+    mailProperties: MailProperties
+): Notification {
+    return Mail(javaMailSender, mailProperties)
 }
