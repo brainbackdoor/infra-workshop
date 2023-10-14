@@ -32,6 +32,10 @@ class MemberService(
         return MemberResponse(member)
     }
 
+    fun findAll(): List<MemberResponse> =
+        memberRepository.findAll()
+            .map { MemberResponse(it) }
+
     fun find(targetId: String): MemberResponse {
         val member: Member = findById(targetId)
         return MemberResponse(member)

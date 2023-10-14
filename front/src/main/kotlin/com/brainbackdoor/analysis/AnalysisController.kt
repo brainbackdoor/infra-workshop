@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AnalysisController(
     private val analysisClient: AnalysisClient,
+    private val analysisMemberService: AnalysisMemberService
 ) {
 
     @Operation(summary = "취미가 코딩인 사람 비율 조회")
@@ -25,8 +26,14 @@ class AnalysisController(
     @Operation(summary = "참여자별로 수강 리스트 조회")
     @GetMapping("/lectures-by-participants")
     @AdminAuth
-    fun findLecturesByParticipants(): ResponseEntity<List<LecturesByParticipantsResponse>> =
+    fun findLecturesByParticipants(): ResponseEntity<List<LecturesByParticipantResponse>> =
         ResponseEntity.ok(analysisClient.findLecturesByParticipants())
+
+    @Operation(summary = "참여자 메일별로 수강 리스트 조회")
+    @GetMapping("/lectures-by-participants-email")
+    @AdminAuth
+    fun findLecturesByParticipantsEmail(): ResponseEntity<List<LecturesByParticipantEmailResponse>> =
+        ResponseEntity.ok(analysisMemberService.findLecturesByParticipantsEmail())
 
     @Operation(summary = "프로그래밍이 취미인 학생 혹은 주니어(0-2년)들이 수강한 강의 이름을 survey.id 기준으로 정렬하여 조회")
     @GetMapping("/lecture-name")

@@ -1,18 +1,34 @@
-package com.brainbackdoor.config
+package com.brainbackdoor.infra
 
 import org.slf4j.MDC
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.task.TaskDecorator
+import org.springframework.scheduling.annotation.Async
 import org.springframework.scheduling.annotation.AsyncConfigurer
 import org.springframework.scheduling.annotation.EnableAsync
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
+import org.springframework.stereotype.Service
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
+
+@Service
+class AsyncService(
+    private val threadPoolTaskExecutor: Executor
+) {
+    @Async
+    fun <T> supplyAsync(supplier: () -> T): CompletableFuture<T> =
+        CompletableFuture.supplyAsync(supplier, threadPoolTaskExecutor)
+
+    @Async
+    fun runAsync(runnable: Runnable): CompletableFuture<Void> =
+        CompletableFuture.runAsync(runnable, threadPoolTaskExecutor)
+}
 
 @Configuration
 @EntityScan("com.brainbackdoor")
 @EnableAsync(proxyTargetClass = true)
-class InfraConfig() : AsyncConfigurer {
+class AsyncConfig() : AsyncConfigurer {
 
     override fun getAsyncExecutor(): Executor {
         val executor = ThreadPoolTaskExecutor()

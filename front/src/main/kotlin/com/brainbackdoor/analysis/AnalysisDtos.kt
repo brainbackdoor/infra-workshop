@@ -9,9 +9,15 @@ data class CodingAsHobbyResponse(
 )
 
 @Schema(description = "참여자별로 수강 리스트 응답")
-data class LecturesByParticipantsResponse(
-    val id: Long,
+data class LecturesByParticipantResponse(
+    val memberId: String,
     val name: String,
+)
+
+@Schema(description = "참여자(메일)별로 수강 리스트 응답")
+data class LecturesByParticipantEmailResponse(
+    val participantEmail: String,
+    val lectureName: String,
 )
 
 @Schema(description = "프로그래밍이 취미인 학생 혹은 주니어(0-2년)들이 수강한 강의 이름을 survey.id 기준으로 정렬 응답")

@@ -10,7 +10,7 @@ data class CodingAsHobbyResponse(
 
 @Schema(description = "참여자별로 수강 리스트 응답")
 data class LecturesByParticipantsResponse(
-    val id: Long,
+    val memberId: String,
     val name: String,
 )
 

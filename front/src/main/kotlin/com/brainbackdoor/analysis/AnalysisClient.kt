@@ -12,7 +12,7 @@ interface AnalysisClient {
     fun findCodingAsHobby(): List<CodingAsHobbyResponse>
 
     @GetMapping("/api/analysis/lectures-by-participants")
-    fun findLecturesByParticipants(): List<LecturesByParticipantsResponse>
+    fun findLecturesByParticipants(): List<LecturesByParticipantResponse>
 
     @GetMapping("/api/analysis/lecture-name")
     fun findLectureNameOrderSurveyId(@RequestParam id: Long): List<LectureNameOrderSurveyIdResponse>

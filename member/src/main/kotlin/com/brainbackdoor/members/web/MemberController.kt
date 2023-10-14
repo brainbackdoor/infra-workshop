@@ -34,4 +34,10 @@ class MemberController(
         val member = memberService.find(id)
         return ResponseEntity.ok(member)
     }
+
+    @Operation(summary = "전체 회원 조회")
+    @GetMapping
+    @AdminAuth
+    fun findAll(): ResponseEntity<List<MemberResponse>> =
+        ResponseEntity.ok(memberService.findAll())
 }
