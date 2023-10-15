@@ -1,9 +1,9 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   datasource:
-    url: jdbc:h2:mem://localhost/~/conference;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:conference;DB_CLOSE_DELAY=-1
 
   flyway:
     enabled: false

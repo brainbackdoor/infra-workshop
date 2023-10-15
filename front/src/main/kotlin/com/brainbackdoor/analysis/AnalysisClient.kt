@@ -1,5 +1,6 @@
 package com.brainbackdoor.analysis
 
+import com.brainbackdoor.web.HttpHeader.Companion.AUTHORIZATION
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
@@ -9,14 +10,17 @@ import org.springframework.web.bind.annotation.*
 )
 interface AnalysisClient {
     @GetMapping("/api/analysis/coding-as-hobby")
-    fun findCodingAsHobby(): List<CodingAsHobbyResponse>
+    fun findCodingAsHobby(@RequestHeader(AUTHORIZATION) token: String): List<CodingAsHobbyResponse>
 
     @GetMapping("/api/analysis/lectures-by-participants")
-    fun findLecturesByParticipants(): List<LecturesByParticipantResponse>
+    fun findLecturesByParticipants(@RequestHeader(AUTHORIZATION) token: String): List<LecturesByParticipantResponse>
 
     @GetMapping("/api/analysis/lecture-name")
-    fun findLectureNameOrderSurveyId(@RequestParam id: Long): List<LectureNameOrderSurveyIdResponse>
+    fun findLectureNameOrderSurveyId(
+        @RequestHeader(AUTHORIZATION) token: String,
+        @RequestParam id: Long
+    ): List<LectureNameOrderSurveyIdResponse>
 
     @GetMapping("/api/analysis/member-by-infra-workshop")
-    fun findMemberByInfraWorkshop(): List<MemberByInfraWorkshopResponse>
+    fun findMemberByInfraWorkshop(@RequestHeader(AUTHORIZATION) token: String): List<MemberByInfraWorkshopResponse>
 }

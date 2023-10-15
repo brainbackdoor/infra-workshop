@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem://localhost/~/member;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:member;DB_CLOSE_DELAY=-1
 
   flyway:
     enabled: false
@@ -21,7 +21,3 @@ logging:
           descriptor:
             sql:
               BasicBinder: DEBUG
-
-external:
-  login-member:
-    host: http://localhost:8080

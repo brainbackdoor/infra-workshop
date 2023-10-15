@@ -14,9 +14,9 @@ private val logger = KotlinLogging.logger { }
 @Component
 class WorkerGracefulShutdownService(
     private val threadPoolTaskExecutors: Map<String, ThreadPoolTaskExecutor>,
-    private var isRunning: Boolean,
-    private var beanFactory: DefaultSingletonBeanRegistry,
+    private var isRunning: Boolean = false,
 ) : SmartLifecycle, BeanFactoryAware {
+    private lateinit var beanFactory: DefaultSingletonBeanRegistry
 
     override fun start() {
         this.isRunning = true

@@ -29,7 +29,6 @@ class AsyncService(
 @EntityScan("com.brainbackdoor")
 @EnableAsync(proxyTargetClass = true)
 class AsyncConfig() : AsyncConfigurer {
-
     override fun getAsyncExecutor(): Executor {
         val executor = ThreadPoolTaskExecutor()
         executor.setTaskDecorator(MDCCopyTaskDecorator())

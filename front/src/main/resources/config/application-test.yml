@@ -1,2 +1,12 @@
 auth:
   secret-key: secret-key
+
+external:
+  conference:
+    host: http://localhost:8082
+  login-member:
+    host: http://localhost:8080
+  analysis:
+    host: http://localhost:8083
+  event:
+    host: http://localhost:8082

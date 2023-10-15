@@ -10,6 +10,9 @@ dependencyManagement {
 dependencies {
     api(project(":core"))
 
+    // Spring and Spring Boot dependencies
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+
     // Databases
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -20,4 +23,7 @@ dependencies {
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
+    // CircuitBreaker
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 }

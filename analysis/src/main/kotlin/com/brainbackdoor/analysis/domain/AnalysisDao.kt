@@ -13,12 +13,16 @@ import org.springframework.stereotype.Repository
 interface AnalysisDao {
 
     @Select(
-        "SELECT hobby, ROUND((Count(id) / (SELECT COUNT(id) FROM analysis.survey) * 100),1) as 'count'\n" +
-                "FROM analysis.survey\n" +
+        "SELECT hobby, ROUND((Count(id) / (SELECT COUNT(id) FROM SURVEY) * 100),1) as 'count'\n" +
+                "FROM SURVEY\n" +
                 "GROUP BY hobby"
     )
     fun findCodingAsHobby(): List<CodingAsHobbyResponse>
 
+    @Select("SELECT P.id, LECTURE.name \n" +
+        "FROM PARTICIPANT AS P\n" +
+        "JOIN LECTURE \n" +
+        "ON LECTURE.lecture_id = P.lecture_id")
     fun findLecturesByParticipants(): List<LecturesByParticipantsResponse>
 
     fun findLectureNameOrderSurveyId(id: Long): List<LectureNameOrderSurveyIdResponse>

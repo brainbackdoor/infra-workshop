@@ -4,3 +4,43 @@ spring:
 
 logging:
   config: classpath:config/logback-${spring.profiles.active}.xml
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 5000
+  circuitbreaker:
+    enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        permittedNumberOfCallsInHalfOpenState: 5
+        registerHealthIndicator: true
+        waitDurationInOpenState: 60s
+
+management:
+  server:
+    port: 8181
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: info, health, circuitbreakers
+      base-path: /management
+  endpoint:
+    health:
+      showDetails: never
+    metrics:
+      enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
