@@ -2,5 +2,22 @@ spring:
   profiles:
     active: local
 
+management:
+  server:
+    port: 8183
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: info, health
+      base-path: /management
+  endpoint:
+    health:
+      showDetails: never
+    metrics:
+      enabled: true
+
 logging:
   config: classpath:config/logback-${spring.profiles.active}.xml

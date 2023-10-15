@@ -21,6 +21,23 @@ spring:
 logging:
   config: classpath:config/logback-${spring.profiles.active}.xml
 
+management:
+  server:
+    port: 8180
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: info, health
+      base-path: /management
+  endpoint:
+    health:
+      showDetails: never
+    metrics:
+      enabled: true
+
 security:
   jwt:
     token:
