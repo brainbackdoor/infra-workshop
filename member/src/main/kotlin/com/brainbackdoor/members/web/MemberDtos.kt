@@ -31,7 +31,7 @@ data class MemberResponse(
 ) {
     constructor(member: Member) : this(
         member.id,
-        member.email(),
+        member.maskedEmail(),
         member.roles.map { it.roleType.name }
     )
 }

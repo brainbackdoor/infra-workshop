@@ -1,7 +1,16 @@
 package com.brainbackdoor.members.domain
 
 import com.brainbackdoor.domain.RandomId
-import jakarta.persistence.*
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
+import jakarta.persistence.Embedded
+import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.ForeignKey
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
 
 @Entity
 class Member(
@@ -62,6 +71,8 @@ class Member(
 
     fun email(): String = email.address
 
+    fun maskedEmail(): String = email.masking()
+
     @Embeddable
     class Email(
         @Column(unique = true, length = 100)
@@ -73,10 +84,18 @@ class Member(
             }
         }
 
+        fun masking(): String = address.replace(EMAIL_MASKING_REGEX) {
+            it.groupValues[1] +
+                "*".repeat(it.groupValues[2].length) +
+                it.groupValues[3] +
+                "*".repeat(it.groupValues[4].length)
+        }
+
         private fun checkMailFormat(address: String): Boolean = EMAIL_REGEX.matches(address)
 
         companion object {
             private val EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}\$".toRegex()
+            private val EMAIL_MASKING_REGEX = """^([^@]{2})([^@]+)([^@]{0}@)([^@]{4})""".toRegex()
         }
     }
 }
