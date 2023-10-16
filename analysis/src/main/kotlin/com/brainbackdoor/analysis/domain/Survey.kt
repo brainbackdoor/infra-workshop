@@ -1,10 +1,7 @@
 package com.brainbackdoor.analysis.domain
 
-import com.brainbackdoor.domain.RandomId
-import jakarta.persistence.Entity
-
-@Entity
 class Survey(
+    var id: Long,
     var hobby: String,
     var devType: String,
     var yearsCoding: String,
@@ -13,4 +10,4 @@ class Survey(
     var ide: String,
     var operatingSystem: String,
     var versionControl: String,
-) : RandomId<Survey>()
+)

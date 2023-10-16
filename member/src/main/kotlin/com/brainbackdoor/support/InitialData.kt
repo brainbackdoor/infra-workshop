@@ -1,7 +1,12 @@
 package com.brainbackdoor.support
 
 import com.brainbackdoor.members.application.MemberService
-import com.brainbackdoor.members.domain.*
+import com.brainbackdoor.members.domain.Member
+import com.brainbackdoor.members.domain.Password
+import com.brainbackdoor.members.domain.Role
+import com.brainbackdoor.members.domain.RoleRepository
+import com.brainbackdoor.members.domain.RoleType
+import com.brainbackdoor.members.domain.email
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
@@ -16,7 +21,6 @@ import org.springframework.stereotype.Component
 abstract class InitialData {
     @Autowired
     lateinit var roleRepository: RoleRepository
-
 
     @Autowired
     lateinit var memberService: MemberService

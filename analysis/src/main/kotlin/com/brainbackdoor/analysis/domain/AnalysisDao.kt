@@ -21,8 +21,8 @@ interface AnalysisDao {
 
     @Select("SELECT P.id, LECTURE.name \n" +
         "FROM PARTICIPANT AS P\n" +
-        "JOIN LECTURE \n" +
-        "ON LECTURE.lecture_id = P.lecture_id")
+        "JOIN LATEST_LECTURE \n" +
+        "ON LATEST_LECTURE.lecture_id = P.lecture_id")
     fun findLecturesByParticipants(): List<LecturesByParticipantsResponse>
 
     fun findLectureNameOrderSurveyId(id: Long): List<LectureNameOrderSurveyIdResponse>

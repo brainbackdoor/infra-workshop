@@ -1,11 +1,11 @@
 package com.brainbackdoor.analysis.domain
 
-import com.brainbackdoor.domain.AutoIncrementId
 import jakarta.persistence.Entity
 
 @Entity
 class Participant(
+    var id: Long,
     var memberId: String,
-    var surveyId: String,
+    var surveyId: Long,
     var lectureId: String
-) : AutoIncrementId<Participant>()
+)
