@@ -1,14 +1,14 @@
 version: '3'
 services:
-  member-db:
+  analysis-db:
     image: library/mysql:8.0
-    container_name: member-db
+    container_name: analysis-db
     restart: always
     ports:
-      - 13306:3306
+      - 33306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: member
+      MYSQL_DATABASE: analysis
       MYSQL_USER: cu
       MYSQL_PASSWORD: password
       TZ: Asia/Seoul
