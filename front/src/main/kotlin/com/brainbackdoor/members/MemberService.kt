@@ -11,7 +11,7 @@ class MemberService(
     @Value("\${auth.secret-key}")
     private val secretKey: String = ""
 
-    @CircuitBreaker(name = "members-circuit-breaker", fallbackMethod = "fallbackMembers")
+    // @CircuitBreaker(name = "members-circuit-breaker", fallbackMethod = "fallbackMembers")
     fun findAll(): List<MemberResponse> = memberClient.findAll(secretKey)
 
     private fun fallbackMembers(e: Throwable): List<MemberResponse> = listOf()
