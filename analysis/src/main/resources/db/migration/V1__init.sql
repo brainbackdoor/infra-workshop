@@ -7,7 +7,7 @@ create table latest_lecture
 create table member
 (
     member_id                  varchar(8),
-    name                       integer
+    age                       integer
 ) engine = InnoDB;
 
 create table survey

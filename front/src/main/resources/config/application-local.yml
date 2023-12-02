@@ -1,9 +1,12 @@
 server:
-  port: 8081
+  port: 8086
 
 spring:
   datasource:
-    url: jdbc:h2:mem://localhost/~/front;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:front;DB_CLOSE_DELAY=-1
+
+  flyway:
+    enabled: false
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     open-in-view: false
@@ -16,7 +19,7 @@ external:
   conference:
     host: http://localhost:8082
   login-member:
-    host: http://localhost:8080
+    host: http://localhost:8084
   analysis:
     host: http://localhost:8083
   event:

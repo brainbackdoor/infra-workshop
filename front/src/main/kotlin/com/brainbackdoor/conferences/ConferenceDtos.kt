@@ -72,7 +72,7 @@ data class ConferenceAllResponse(
     val recruitmentEndDate: String,
 
     @Schema(title = "컨퍼런스 일정")
-    val conferenceSchedule: String,
+    val schedule: String,
 
     @Schema(title = "컨퍼런스 장소")
     val area: String,
@@ -87,10 +87,7 @@ data class ConferenceAllResponse(
     val contents: String = "",
 
     @Schema(title = "컨퍼런스 모집 상태")
-    val status: String,
-
-    @Schema(title = "참가자")
-    val applicants: List<String>
+    val status: String
 )
 
 @Schema(description = "컨퍼런스 모집 상태 요청")

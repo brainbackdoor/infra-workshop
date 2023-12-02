@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.mail.javamail.MimeMessagePreparator
-import org.springframework.scheduling.annotation.Async
 
 open class Mail(
     private val javaMailSender: JavaMailSender,
@@ -17,7 +16,6 @@ open class Mail(
         send(listOf(recipient), subject, contents)
     }
 
-    // @Async
     override fun send(recipient: List<String>, subject: String, contents: String) {
         check(recipient.isNotEmpty()) {
             throw IllegalArgumentException("수신자가 없어 메일을 발송할 수 없습니다.")

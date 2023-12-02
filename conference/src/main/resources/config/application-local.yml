@@ -3,18 +3,24 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:conference;DB_CLOSE_DELAY=-1
+    url: jdbc:mysql://localhost:23306/conference?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    username: cu
+    password: password
 
   flyway:
-    enabled: false
+    enabled: true
+    baseline-version: 0
+    baseline-on-migrate: true
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
     show-sql: true
+    hibernate:
+      ddl-auto: create
 
 logging:
   level:

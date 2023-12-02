@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    api(project(":core"))
+    implementation(project(":core"))
 
     // Spring and Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -18,7 +18,7 @@ dependencies {
     implementation("com.sun.xml.bind:jaxb-impl:2.3.1")
 
     // Databases
-    runtimeOnly("com.h2database:h2")
+    testImplementation("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("org.flywaydb:flyway-core")
     runtimeOnly("org.flywaydb:flyway-mysql")

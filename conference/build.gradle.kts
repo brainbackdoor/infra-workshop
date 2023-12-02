@@ -11,10 +11,10 @@ dependencyManagement {
 }
 
 dependencies {
-    api(project(":core"))
+    implementation(project(":core"))
 
     // Databases
-    runtimeOnly("com.h2database:h2")
+    testImplementation("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("org.flywaydb:flyway-core")
     runtimeOnly("org.flywaydb:flyway-mysql")

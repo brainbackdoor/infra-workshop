@@ -8,13 +8,13 @@ dependencyManagement {
 }
 
 dependencies {
-    api(project(":core"))
+    implementation(project(":core"))
 
     // Spring and Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter-aop")
 
     // Databases
-    runtimeOnly("com.h2database:h2")
+    testImplementation("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
 
     // Feign
