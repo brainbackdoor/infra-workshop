@@ -197,5 +197,4 @@ class RecruitmentTest {
     )
 
     private val applicants = Applicants(limited = 10)
-
 }
