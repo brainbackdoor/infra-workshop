@@ -27,12 +27,15 @@
 
 ## 🚀 Getting Started
 
+- 미션과 관련한 사항은 각 미션의 가이드 문서를 참고하시길 바랍니다.
+
 ### 1. 로컬 DB 구성
 
 #### 준비
 
 - [도커 다운로드](https://www.docker.com/products/docker-desktop)
 - `[module]/docker/db/mysql/init`에 dump 파일을 넣은 상태로 실행하면 자동 INSERT
+- `sql/[module].sql` 파일을 활용하여 샘플 데이터를 추가
 
 #### 실행 방법
 
@@ -66,9 +69,8 @@
 
 ## 🙋🏻‍♂️ Reference
 
-- 컨벤션 문서
-- 이벤트스토밍
-- 테스트 작성 기준
+- [컨벤션 문서](https://www.brainbackdoor.com/infra-workshop/convention)
+- [테스트 작성 기준](https://www.brainbackdoor.com/infra-workshop/test-criteria)
 
 
 <br>
