@@ -4,7 +4,7 @@ plugins {
     idea
     id("org.springframework.boot") version "3.0.7"
     id("io.spring.dependency-management") version "1.1.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.1.0"
+    // id("org.jlleitschuh.gradle.ktlint") version "10.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.5.21"
@@ -27,7 +27,7 @@ subprojects {
         plugin("org.jetbrains.kotlin.plugin.noarg")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
-        plugin("org.jlleitschuh.gradle.ktlint")
+        // plugin("org.jlleitschuh.gradle.ktlint")
     }
 
     repositories {
@@ -77,11 +77,6 @@ subprojects {
         test {
             useJUnitPlatform()
             jvmArgs("-Djava.security.egd=file:/dev/./urandom", "-Dspring.config.location=classpath:/config/")
-        }
-
-        ktlint {
-            verbose.set(true)
-            disabledRules.addAll("import-ordering")
         }
     }
 

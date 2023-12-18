@@ -1,0 +1,16 @@
+server:
+  port: 8086
+
+external:
+  conference:
+    host: http://localhost:8082
+  login-member:
+    host: http://localhost:8084
+  analysis:
+    host: http://localhost:8083
+  event:
+    host: http://localhost:8082
+
+auth:
+  secret-key: secret-key
+

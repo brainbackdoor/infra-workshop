@@ -9,7 +9,7 @@ spring:
 
   flyway:
     enabled: true
-    baseline-version: 0
+    baseline-version: 1
     baseline-on-migrate: true
 
   jpa:
@@ -20,7 +20,7 @@ spring:
         format_sql: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 logging:
   level:

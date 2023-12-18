@@ -1,15 +1,15 @@
 server:
-  port: 8083
+  port: 8080
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:33306/analysis?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
-    username: cu
-    password: password
+#    url: jdbc:mysql://analysis-1.cluster-cvj9m8lve12s.ap-northeast-2.rds.amazonaws.com:3306/analysis?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+#    username: root
+#    password: password1!
 
   flyway:
     enabled: true
-    baseline-version: 0
+    baseline-version: 1
     baseline-on-migrate: true
 
   jpa:
@@ -19,8 +19,6 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-    hibernate:
-      ddl-auto: validate
 
 logging:
   level:
