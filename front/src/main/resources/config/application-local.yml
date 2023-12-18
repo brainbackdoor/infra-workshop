@@ -1,6 +1,20 @@
 server:
   port: 8086
 
+spring:
+  datasource:
+    url: jdbc:h2:mem:front;DB_CLOSE_DELAY=-1
+
+  flyway:
+    enabled: false
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
 external:
   conference:
     host: http://localhost:8082
