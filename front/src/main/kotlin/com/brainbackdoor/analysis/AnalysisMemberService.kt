@@ -25,6 +25,7 @@ class AnalysisMemberService(
             .toList()
     }
 
+    // 비동기처리로 대응할수도 있지만, 이 경우엔 회원 정보가 너무 많아 네트워크 비용이 많이 발생합니다. 이 경우엔, 어떻게 대응하는 것이 합리적일까요?
     fun findLecturesByParticipantsEmailAsync(loginToken: String): List<LecturesByParticipantEmailResponse> {
         val lectures = async { analysisClient.findLecturesByParticipants(secretKey) }
         val members = async { memberService.findAll(loginToken) }
