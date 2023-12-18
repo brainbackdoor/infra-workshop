@@ -6,6 +6,11 @@ spring:
 #    url: jdbc:mysql://member.cluster-cvj9m8lve12s.ap-northeast-2.rds.amazonaws.com:3306/member?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
 #    username: root
 #    password: password1!
+    hikaricp:
+      connection-timeout: 3
+      maximum-pool-size: 50 # 모든 서버가 가용중일 때 최대 커넥션 수가 MySQL의 최대 커넥션 수의 5~60% 정도를 유지할 것을 권장
+      max-lifetime: 55000 # 55s, MySQL의 WAIT_TIMEOUT 보다 낮게 설정해야 함. 5초 정도 차이를 둘 것을 권장함 https://github.com/brettwooldridge/HikariCP/issues/1138
+
 
   flyway:
     enabled: true
