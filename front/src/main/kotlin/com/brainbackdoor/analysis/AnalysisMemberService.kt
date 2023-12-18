@@ -16,18 +16,18 @@ class AnalysisMemberService(
     @Value("\${auth.secret-key}")
     private val secretKey: String = ""
 
-    fun findLecturesByParticipantsEmail(): List<LecturesByParticipantEmailResponse> {
+    fun findLecturesByParticipantsEmail(loginToken: String): List<LecturesByParticipantEmailResponse> {
         val lectures = analysisClient.findLecturesByParticipants(secretKey)
-        val members = memberService.findAll()
+        val members = memberService.findAll(loginToken)
 
         return lectures.stream()
             .map { LecturesByParticipantEmailResponse(members, it) }
             .toList()
     }
 
-    fun findLecturesByParticipantsEmailAsync(): List<LecturesByParticipantEmailResponse> {
+    fun findLecturesByParticipantsEmailAsync(loginToken: String): List<LecturesByParticipantEmailResponse> {
         val lectures = async { analysisClient.findLecturesByParticipants(secretKey) }
-        val members = async { memberService.findAll() }
+        val members = async { memberService.findAll(loginToken) }
 
         joinAsync(lectures, members)
 
